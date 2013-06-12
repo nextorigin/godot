@@ -27,7 +27,8 @@
     "utile": "0.1.7",
     "window-stream": "~0.3.1",
     "backoff": "2.1.x",
-    "json-stream": "0.1.x"
+    "json-stream": "0.1.x",
+    "engine.io": "~0.6.1"
   },
   "devDependencies": {
     "optimist": "0.3.4",
