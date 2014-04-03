@@ -92,33 +92,19 @@ There are several core Reactor primitives available in `godot` which can be comp
 * `.forward(options)`: Forwards all events to a remote server located at `options.host` and `options.port`.
 * `.sms(options)`: Sends an sms to the specified [options][sms-options].
 * `.where(key, value)|.where(filters)`: Filters events based on a single `key:value` pair or a set of `key:value` filters.
-* `.rollup(interval, limit)|.rollup(options)`: Rollup a `limit` amount of events to emit every `interval`. `interval` can also be a function to allow you to create varying intervals (see below).
+* `.rollup(interval, limit)|.rollup(options)`: Rollup a `limit` amount of events to emit every `interval`. `interval` can also be a function to allow you to create varying intervals (see docs).
+* `.by(key|[key0, key1...], reactor)`: Creates a new godot reactor stream
+  for each unique value for the key or keys passed into it.
+* `.around(reactor0, reactor1, ...)`: Pipe the same stream of data to independent reactor streams
+* `.console()|.console(formatFn)`: output the data with `console.dir` or do custom output with a `formatFn` that takes `data` as an argument
+* `.meta(key, reactor)`: assigns a value to `data.meta[key]` to the data coming through the stream based on the metric value of the `reactor` given as the second argument.
+* `.sum()`: Sum the `data.metric` value of the events as they come through the pipe stream.
+* `.over(ceiling)`: Emits an event when `data.metric` is > `ceiling`
+* `.within(min, max)`: Emits an event when `data.metric` is within the given inclusive range of {min, max}
+* `.movingAverage({average: 'type', window: window})`: Calculate various types of [moving averages][moving-average] over a defined event or time window.
+* `.windowSum(window): Calculates the sum of metrics over a given event or time window
+* `.redis(options, redisFn)`: Returns a redis client with data and callback to the redisFn to be used for redis operations to occur on each event.
 
-#### Rollup
-Here are two possible rollup examples:
-
-```js
-//
-// Rolls up 10,0000 events every 5 minute interval
-//
-var rollup =
-  reactor()
-    .rollup(1000 * 60 * 5, 10000)
-
-//
-// Scaling Rollup, rolls up 10,000 events every 5min interval for 1 hour,
-// then rolls up 10,000 events every 30mins
-//
-
-var scalingRollup =
-  reactor()
-    .rollup(function (period) {
-      if(period < 12) {
-        return 1000 * 60 * 5;
-      }
-      return 1000 * 60 * 30;
-    }, 10000)
-```
 
 ## Producers
 Producers in Godot are **readable** [Stream][stream] instances which produce [Events](#events). Events will be emitted by a given Producer every `ttl` milliseconds.
@@ -139,3 +125,4 @@ All tests are written in [vows][vows] and can be run with [npm][npm]:
 [sms-options]: https://github.com/nodejitsu/godot/blob/master/lib/godot/reactor/sms.js
 [npm]: https://npmjs.org
 [vows]: http://vowsjs.org/
+[moving-average]: https://en.wikipedia.org/wiki/Moving_average
