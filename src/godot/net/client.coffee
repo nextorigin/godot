@@ -83,6 +83,7 @@ class Client extends events.EventEmitter
       description: "No Description"
       tags: []
       metric: 1
+      meta: {}
       ttl: 15000
 
     @add producer for producer in @_producers if Array.isArray @_producers
