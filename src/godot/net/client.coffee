@@ -238,6 +238,8 @@ class Client extends events.EventEmitter
   # connection associated with this client.
   #
   write: (data) ->
+    return unless @socket
+
     serializer = @createSerializer()
 
     switch @type
