@@ -258,7 +258,7 @@ class Client extends events.EventEmitter
   # Writes to a socket with some default values attached.
   # This is purely a convenience method
   #
-  produce: (data) ->
+  produce: (data = {}) ->
 
     #
     # Add defaults to each object where a value does not already exist
