@@ -13,6 +13,8 @@ ip     = require "ip"
 uuid   = require "node-uuid"
 utile  = require "utile"
 utils  = require "../common/utils"
+jsonStream = require "json-stream"
+{log}  = utils
 {noop} = utils
 {clone} = utile
 
@@ -53,13 +55,13 @@ class Client extends events.EventEmitter
   ]
 
   validate: (options) ->
-    unless options?.type? in @validTypes
+    unless options?.type in @validTypes
       return "Cannot create server without type: #{@validTypes.join ', '}"
 
-    unless options.format? in @validFormats
+    unless options.format in @validFormats
       return "Cannot create server without format: #{@validFormats.join ', '}"
 
-    unless typeof options.reconnect? is "object"
+    unless !options.reconnect or typeof options.reconnect is "object"
       return "Reconnect must be a defined object if used"
 
   constructor: (options) ->
@@ -172,7 +174,7 @@ class Client extends events.EventEmitter
 
   socketError: (err) => if @reconnect then @_reconnect err else @emit "error", err
 
-  respond: ->
+  respond: =>
     #
     # Remark: We have successfully connected so reset the terminate variable
     #
@@ -239,7 +241,7 @@ class Client extends events.EventEmitter
 
     switch @type
       when "tcp", "tls", "unix"
-        serializer.pipe @socket
+        serializer.pipe @socket, end: false
       when "udp"
         serializer.once "data", @_sendOverUDP
 

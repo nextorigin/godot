@@ -260,7 +260,7 @@ class Server extends events.EventEmitter
     #
     # Remark: Too much churn here to emit?
     #
-    parser.on "data", (event) => @tellReactors id, msg
+    parser.on "data", (msg) => @tellReactors id, msg
     socket.setEncoding "utf8"
     socket.pipe parser
     return
@@ -300,6 +300,12 @@ class Server extends events.EventEmitter
     address = socket.remoteAddress
     port    = socket.remotePort
     id      = address + ":" + port
+
+    # socket.setKeepAlive true
+    # socket.setTimeout 5000 ->
+    #   log "socket timeout"
+    #   socket.end "HTTP/1.1 200 OK\r\nConnection: close\r\n\r\n"
+
     @decode id, socket
 
   #
