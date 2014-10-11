@@ -180,6 +180,7 @@ class Client extends events.EventEmitter
     # Remark: We have successfully connected so reset the terminate variable
     #
     @terminate = false
+    @attempt = null
     @emit "connect"
     return
 
