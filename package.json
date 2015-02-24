@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "coffee-script": "^1.6.3",
+    "one-time": "0.0.3",
     "optimist": "~0.6.0",
     "r...e": "~0.2.0",
     "vows": "~0.8.1"
