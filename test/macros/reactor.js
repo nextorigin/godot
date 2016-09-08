@@ -55,10 +55,11 @@ exports.shouldEmitDataSync = function (reactor, fixture, length, assertFn) {
   return {
     topic: function () {
       var source = new ReadWriteStream(),
-          stream = reactor.createStream(source),
+          stream = reactor,
           that = this,
           all = [];
 
+      source.pipe(stream);
       stream.on('data', function (data) { all.push(data) });
       stream.on('end', function () { that.callback(null, all) });
       helpers.writeFixture(source, fixture);

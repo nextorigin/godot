@@ -25,50 +25,48 @@ function increment(i) {
   };
 }
 
+var overReactor = new godot.over(5);
+overReactor.pipe(new godot.map(function (data) {
+  over++;
+  return data;
+}));
+
+var underReactor = new godot.under(5);
+underReactor.pipe(new godot.map(function (data) {
+  under++;
+  return data;
+}));
+
 vows.describe('godot/reactor/around').addBatch({
   "Godot around": {
     "one reactor": macros.shouldEmitDataSync(
-      godot.reactor()
-        .around(
-          godot.reactor().map(increment(0))
+        new godot.around(
+          new godot.map(increment(0))
         ),
       'by',
       6
     ),
     "two reactors": macros.shouldEmitDataSync(
-      godot.reactor()
-        .around(
-          godot.reactor().map(increment(1)),
-          godot.reactor().map(increment(1))
+      new godot.around(
+          new godot.map(increment(1)),
+          new godot.map(increment(1))
         ),
       'by',
       6
     ),
     "three reactors": macros.shouldEmitDataSync(
-      godot.reactor()
-        .around(
-          godot.reactor().map(increment(2)),
-          godot.reactor().map(increment(2)),
-          godot.reactor().map(increment(2))
+      new godot.around(
+          new godot.map(increment(2)),
+          new godot.map(increment(2)),
+          new godot.map(increment(2))
         ),
       'by',
       6
     ),
     "over under": macros.shouldEmitDataSync(
-      godot.reactor()
-        .around(
-          godot.reactor()
-            .over(5)
-            .map(function (data) {
-              over++;
-              return data;
-            }),
-          godot.reactor()
-            .under(5)
-            .map(function (data) {
-              under++;
-              return data;
-            })
+      new godot.around(
+          overReactor,
+          underReactor
         ),
       'by',
       6
