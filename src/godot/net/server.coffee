@@ -219,8 +219,10 @@ class Server extends events.EventEmitter
   createReactor: (id) =>
     log "creating reactor for #{id}"
     socket = new Socket
+    socket.pipe @reactors[id]
+
     socket: socket
-    reactor: @reactors[id](socket)
+    reactor: @reactors[id]
 
   #
   # ### function createReactors (id)
