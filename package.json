@@ -32,7 +32,12 @@
     "window-stream": "~0.7.4"
   },
   "devDependencies": {
-    "coffee-script": "^1.6.3",
+    "chai": "^3.5.0",
+    "coveralls": "^2.11.12",
+    "iced-coffee-coverage": "^1.0.3",
+    "iced-coffee-script": "^108.0.11",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.0.2",
     "one-time": "0.0.3",
     "optimist": "~0.6.0",
     "r...e": "~0.2.0",
@@ -43,6 +48,11 @@
     "node": "0.10.x"
   },
   "scripts": {
-    "test": "vows --spec -i"
+    "test": "npm run test:modules && npm run test:coverage",
+    "test:modules": "mocha --recursive --compilers coffee:iced-coffee-script/register --require iced-coffee-coverage/register test/net/*.coffee",
+    "test:coverage": "istanbul report",
+    "build": "iced --bare --map --runtime node -o lib/ -c src/",
+    "watch": "iced --watch --bare --map --runtime node -o lib/ -c src/",
+    "test-old": "vows --spec -i"
   }
 }
