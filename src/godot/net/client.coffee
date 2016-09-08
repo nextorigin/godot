@@ -20,9 +20,9 @@ jsonStream = require "json-stream"
 
 
 #
-# ### function Server (options)
-# #### @options {Object} Options for this server
-# ####   @options.type      {udp|tcp} Networking protocol of this server.
+# ### function Client (options)
+# #### @options {Object} Options for this client
+# ####   @options.type      {udp|tcp} Networking protocol of this client.
 # ####   @options.producers {Array}   Set of producers to get data from.
 # ####   @options.host      {string}  Host to send producer data to.
 # ####   @options.port      {Number}  Port to send producer data to.
@@ -56,10 +56,10 @@ class Client extends events.EventEmitter
 
   validate: (options) ->
     unless options?.type in @validTypes
-      return "Cannot create server without type: #{@validTypes.join ', '}"
+      return "Cannot create client without type: #{@validTypes.join ', '}"
 
     unless options.format in @validFormats
-      return "Cannot create server without format: #{@validFormats.join ', '}"
+      return "Cannot create client without format: #{@validFormats.join ', '}"
 
     unless !options.reconnect or typeof options.reconnect is "object"
       return "Reconnect must be a defined object if used"
