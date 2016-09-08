@@ -58,9 +58,6 @@ class Client extends events.EventEmitter
     unless options?.type in @validTypes
       return "Cannot create client without type: #{@validTypes.join ', '}"
 
-    unless options.format in @validFormats
-      return "Cannot create client without format: #{@validFormats.join ', '}"
-
     unless !options.reconnect or typeof options.reconnect is "object"
       return "Reconnect must be a defined object if used"
 
@@ -71,6 +68,7 @@ class Client extends events.EventEmitter
     @producers  = {}
     @handlers   = data: {}, end: {}
     @[key]      = options[key] for key in @validSettings
+    @format   or= "json"
     @host     or= "0.0.0.0"
     @_producers = options.producers
     @attempt    = null

@@ -57,9 +57,6 @@ class Server extends events.EventEmitter
     unless options?.type in @validTypes
       return "Cannot create server without type: #{@validTypes.join ', '}"
 
-    unless options.format in @validFormats
-      return "Cannot create server without format: #{@validFormats.join ', '}"
-
   constructor: (options) ->
     super()
 
@@ -69,6 +66,7 @@ class Server extends events.EventEmitter
     @reactors  = {}
     @hosts     = {}
     @[key]     = options[key] for key in @validSettings
+    @format  or= "json"
     @host    or= "0.0.0.0"
     @multiplex ?= true
     @_reactors = options.reactors
