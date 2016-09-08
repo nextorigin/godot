@@ -8,7 +8,7 @@ dgram      = require "dgram"
 events     = require "events"
 net        = require "net"
 tls        = require "tls"
-jsonStream = require "json-stream"
+ndjson     = require "ndjson"
 uuid       = require "node-uuid"
 Socket     = require "./socket"
 common     = require "../common"
@@ -249,7 +249,7 @@ class Server extends events.EventEmitter
 
   createParser: ->
     switch @format
-      when "json"     then jsonStream.parse()
+      when "json"     then ndjson.parse()
 
   tellReactors: (id, msg) -> reactor.socket.write msg for reactor in @hosts[id]
 

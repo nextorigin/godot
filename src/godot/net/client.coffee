@@ -13,7 +13,7 @@ ip     = require "ip"
 uuid   = require "node-uuid"
 utile  = require "utile"
 utils  = require "../common/utils"
-jsonStream = require "json-stream"
+ndjson = require "ndjson"
 {log}  = utils
 {noop} = utils
 {clone} = utile
@@ -227,7 +227,7 @@ class Client extends events.EventEmitter
 
   createSerializer: ->
     switch @format
-      when "json"     then jsonStream.stringify()
+      when "json"     then ndjson.stringify()
 
   _sendOverUDP: (chunk) =>
     @socket.send chunk, 0, chunk.length, @port, @host
