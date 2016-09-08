@@ -6,5 +6,4 @@
  */
 
 exports.producer = require('./producer');
-exports.net      = require('./net');
 exports.reactor  = require('./reactor');
