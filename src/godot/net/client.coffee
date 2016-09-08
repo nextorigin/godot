@@ -220,7 +220,7 @@ class Client extends events.EventEmitter
       when "tcp", "tls", "unix" then @socket.destroy()
       else @socket.close()
 
-    @remove producer for producer in @producers
+    @remove producer for id, producer of @producers
     return this
 
   createSerializer: ->
