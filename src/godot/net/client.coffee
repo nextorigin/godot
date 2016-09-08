@@ -128,12 +128,11 @@ class Client extends events.EventEmitter
     return (@callback err) if @callback
     @emit "error", err
 
-  parseArgs: (port, host, callback) ->
+  parseArgs: ->
     #
     # Do some fancy arguments parsing to support everything
     # being optional.
     #
-    @callback = null
     for arg in arguments then switch typeof arg
       when "number"   then port = arg
       when "string"   then host = arg
@@ -148,7 +147,7 @@ class Client extends events.EventEmitter
         @host = host if host
       when "unix"
         # Equals host due to it being the only string
-        @path = host
+        @path = host if host
         return "path" unless @path
 
     return

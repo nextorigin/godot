@@ -130,7 +130,7 @@ class Server extends events.EventEmitter
     return (@callback err) if @callback
     @emit "error", err
 
-  parseArgs: (port, host, callback) ->
+  parseArgs: ->
     #
     # Do some fancy arguments parsing to support everything
     # being optional.
