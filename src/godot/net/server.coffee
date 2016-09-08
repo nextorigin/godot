@@ -61,16 +61,16 @@ class Server extends events.EventEmitter
       return "Cannot create server without format: #{@validFormats.join ', '}"
 
   constructor: (options) ->
+    super()
+
     err = @validate options
     throw new Error err if err
-
-    events.EventEmitter.call this
 
     @reactors  = {}
     @hosts     = {}
     @[key]     = options[key] for key in @validSettings
     @host    or= "0.0.0.0"
-    @multiplex = true unless @multiplex?
+    @multiplex ?= true
     @_reactors = options.reactors
 
     log "initalizing #{if @multiplex then 'multiplex ' else ''}godot server"
@@ -155,16 +155,16 @@ class Server extends events.EventEmitter
     return
 
   respond: (err) =>
-    return if responded
+    return if @responded
 
     @server.removeListener "error", @respond
     @server.removeListener "listening", @respond
-    responded = true
+    @responded = true
     @emit "listening" unless err
     return (@callback err) if @callback
     @emit "error", err if err
 
-    responded = false
+    @responded = false
 
   #
   # ### function listen (port, [host], callback)

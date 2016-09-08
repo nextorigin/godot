@@ -65,10 +65,8 @@ class Client extends events.EventEmitter
       return "Reconnect must be a defined object if used"
 
   constructor: (options) ->
-    err = @validate options
-    throw new Error err if err
-
-    events.EventEmitter.call this
+    throw new Error err if err = @validate options
+    super()
 
     @producers  = {}
     @handlers   = data: {}, end: {}
@@ -173,7 +171,9 @@ class Client extends events.EventEmitter
     @emit "reconnect", backoff
     @connect()
 
-  socketError: (err) => if @reconnect then @_reconnect err else @emit "error", err
+  socketError: (err) =>
+    if @reconnect then @_reconnect err
+    else @emit "error", err
 
   respond: =>
     #
@@ -192,19 +192,18 @@ class Client extends events.EventEmitter
   # Opens the underlying network connection for this client.
   #
   connect: (port, host, callback) ->
-    err = @parseArgs arguments...
-    return @argError err if err
+    return @argError err if err = @parseArgs arguments...
 
     switch @type
       when "tcp"
-        @socket = net.connect {port: @port, host: @host}, @callback
+        @socket = net.connect {@port, @host}, @callback
       when "tls"
-        @socket = tls.connect {port: @port, host: @host}, @callback
+        @socket = tls.connect {@port, @host}, @callback
       when "udp"
         @socket = dgram.createSocket "udp4"
         process.nextTick @callback
       when "unix"
-        @socket = net.connect {path: @path}, @callback
+        @socket = net.connect {@path}, @callback
 
     @socket.on "error", @socketError
     @socket.on "connect", @respond

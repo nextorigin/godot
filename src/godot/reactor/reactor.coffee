@@ -20,7 +20,6 @@ class Reactor extends events.EventEmitter
   #
 
   constructor: (options = {}) ->
-    events.EventEmitter.call this
     options   = name: options if typeof options is "string"
     @reactors = []
     @id       = uuid.v4()
