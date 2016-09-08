@@ -5,5 +5,4 @@
  *
  */
 
-exports.producer = require('./producer');
 exports.reactor  = require('./reactor');
