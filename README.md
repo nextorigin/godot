@@ -1,6 +1,14 @@
 # godot2
 
+[![Build Status][ci-master]][travis-ci]
+[![Coverage Status][coverage-master]][coveralls]
+[![Dependency Status][dependency]][david]
+[![devDependency Status][dev-dependency]][david]
+[![Downloads][downloads]][npm-package]
+
 A streaming real-time event processor based on [Riemann][riemann] written in Node.js
+
+[![NPM][npm-stats]][npm-package]
 
 ![](https://i.cloudup.com/zCF6jLRpLf.png)
 
@@ -160,3 +168,16 @@ _Sound Wave designed by Alessandro Suraci from the thenounproject.com_
 [sms-options]: https://github.com/nodejitsu/godot/blob/master/lib/godot/reactor/sms.js
 [npm]: https://npmjs.org
 [vows]: http://vowsjs.org/
+
+
+  [ci-master]: https://img.shields.io/travis/nextorigin/godot2/master.svg?style=flat-square
+  [travis-ci]: https://travis-ci.org/nextorigin/godot2
+  [coverage-master]: https://img.shields.io/coveralls/nextorigin/godot2/master.svg?style=flat-square
+  [coveralls]: https://coveralls.io/r/nextorigin/godot2
+  [dependency]: https://img.shields.io/david/nextorigin/godot2.svg?style=flat-square
+  [david]: https://david-dm.org/nextorigin/godot2
+  [dev-dependency]: https://img.shields.io/david/dev/nextorigin/godot2.svg?style=flat-square
+  [david-dev]: https://david-dm.org/nextorigin/godot2?type=dev
+  [downloads]: https://img.shields.io/npm/dm/godot2.svg?style=flat-square
+  [npm-package]: https://www.npmjs.org/package/godot2
+  [npm-stats]: https://nodei.co/npm/godot2.png?downloads=true&downloadRank=true&stars=true
