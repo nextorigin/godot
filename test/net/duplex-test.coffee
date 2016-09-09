@@ -99,7 +99,7 @@ describe "godot/net/duplex", ->
             await shouldStartServer options, ideally defer server, client
             d            = new Date
 
-            whereExpire.once "data", -> done "TTL expired incorrectly."
+            whereExpire.once "data", (data) -> done new Error "TTL expired incorrectly."
             await setTimeout defer(), 300
 
             d2           = new Date
