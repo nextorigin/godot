@@ -3,7 +3,7 @@
 [![Build Status][ci-master]][travis-ci]
 [![Coverage Status][coverage-master]][coveralls]
 [![Dependency Status][dependency]][david]
-[![devDependency Status][dev-dependency]][david]
+[![devDependency Status][dev-dependency]][david-dev]
 [![Downloads][downloads]][npm-package]
 
 A streaming real-time event processor based on [Riemann][riemann] written in Node.js
