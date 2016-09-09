@@ -36,6 +36,7 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "collect-stream": "^1.1.1",
+    "concat-stream": "^1.5.2",
     "coveralls": "^2.11.12",
     "iced-coffee-coverage": "^1.0.3",
     "iced-coffee-script": "^108.0.11",
