@@ -8,7 +8,7 @@ client-reconnect-test.js: Basic tests for the reconnection of net client.
 errify     = require "errify"
 
 
-godot      = require "../../lib/godot"
+godot      = require "../../src/godot"
 helpers    = require "../helpers"
 mocks      = require "../mocks"
 

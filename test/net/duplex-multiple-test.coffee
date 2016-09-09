@@ -9,7 +9,7 @@ fs         = require "fs"
 errify     = require "errify"
 
 
-godot      = require "../../lib/godot"
+godot      = require "../../src/godot"
 helpers    = require "../helpers"
 
 

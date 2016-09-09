@@ -8,7 +8,7 @@ errify     = require "errify"
 stream     = require "readable-stream"
 collect    = require "collect-stream"
 
-godot      = require "../../lib/godot"
+godot      = require "../../src/godot"
 helpers    = require("../helpers").reactor
 
 
