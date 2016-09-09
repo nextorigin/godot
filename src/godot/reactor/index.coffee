@@ -33,7 +33,7 @@ reactor = (godot) ->
     method  = parts[0]
     method += utile.capitalize parts[1] if parts.length > 1
 
-    log "loading reactor #{name}"
+    # log "loading reactor #{name}"
     try
       godot[method] = require "./#{name}"
     catch
@@ -45,7 +45,7 @@ reactor = (godot) ->
     method  = parts[0]
     method += utile.capitalize parts[1] if parts.length > 1
 
-    log "loading reactor #{name}"
+    # log "loading reactor #{name}"
     godot[method] = require "./#{name}"
 
   return
