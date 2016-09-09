@@ -6,7 +6,7 @@
 #
 events = require "events"
 uuid   = require "node-uuid"
-ReadWriteStream = require "../common/read-write-stream"
+ReadWriteStream = require "../../../lib/godot/common/read-write-stream"
 
 #reactor
 # ### function Reactor ()

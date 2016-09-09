@@ -27,8 +27,20 @@ reactor = (godot) ->
   #
   # Register the appropriate reactors
   #
-  for file in fs.readdirSync __dirname when file not in core and (path.extname file) is ".js"
+  for file in fs.readdirSync __dirname + "/../../../lib/godot/reactor" when file not in core and (path.extname file) is ".js"
     name    = file.replace /.js$/, ""
+    parts   = name.split "-"
+    method  = parts[0]
+    method += utile.capitalize parts[1] if parts.length > 1
+
+    log "loading reactor #{name}"
+    try
+      godot[method] = require "./#{name}"
+    catch
+
+  console.log "now with coffee"
+  for file in fs.readdirSync __dirname + "/../../../src/godot/reactor" when file not in core and (path.extname file) is ".coffee"
+    name    = file.replace /.coffee$/, ""
     parts   = name.split "-"
     method  = parts[0]
     method += utile.capitalize parts[1] if parts.length > 1

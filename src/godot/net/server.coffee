@@ -11,9 +11,8 @@ tls        = require "tls"
 ndjson     = require "ndjson"
 uuid       = require "node-uuid"
 Socket     = require "./socket"
-common     = require "../common"
-{ReadWriteStream} = common
-{log} = require "../common/utils"
+common     = require "../../../lib/godot/common"
+{log}      = require "../../../lib/godot/common/utils"
 
 
 #
