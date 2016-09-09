@@ -65,7 +65,7 @@ describe "godot/net/duplex", ->
 
       sockets = {tcp, udp, unix}
       for type, options of sockets then do (type, options) ->
-        describe "\"where\" reactor", ->
+        describe "\"where\" reactor over #{type.toUpperCase()} socket", ->
           it "should emit events appropriately", (done) ->
             ideally = errify done
             await shouldStartServer options, ideally defer server, client
@@ -93,7 +93,7 @@ describe "godot/net/duplex", ->
             server.close()
             done()
 
-        describe "\"where-expire\" reactor", ->
+        describe "\"where-expire\" reactor over #{type.toUpperCase()} socket", ->
           it "should never expire", (done) ->
             ideally = errify done
             await shouldStartServer options, ideally defer server, client
