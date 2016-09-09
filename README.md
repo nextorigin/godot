@@ -1,8 +1,12 @@
-# godot
+# godot2
+
+A streaming real-time event processor based on [Riemann][riemann] written in Node.js
 
 ![](https://i.cloudup.com/zCF6jLRpLf.png)
 
-Godot is a streaming real-time event processor based on [Riemann][riemann] written in Node.js
+**Godot2** is a major rewrite for Node 6 and Streams2/Streams3 syntax, similar to as suggested in [nodejitsu/godot#64](https://github.com/nodejitsu/godot/issues/64).  The async patterns and inheritance are simplified with Iced CoffeeScript.
+
+Many thanks and much credit to the original authors at Nodejitsu, [@indexzero](https://github.com/indexzero) and [@jcrugzz](https://github.com/jcrugzz).
 
 * [Usage](#usage)
 * [Events](#events)
@@ -85,7 +89,7 @@ Similar to [Riemann][riemann], events in `godot` are simply JSON sent over UDP o
 ## Reactors
 Reactors in Godot are **readable and writable** [Stream][stream] instances which consume [Events](#events) and produce actions or aggregate data flow. In the example above you may see that when we define the array of reactors by wrapping it with a simple function. This function has a single argument that represents the data coming over the wire. This data can be piped to any `godot` stream or any Transform stream you find on NPM!
 
-*Note* Reactors are currently still streams1 streams (so they do not handle backpressure) but this will begin to change in the near future for node `0.12.x`. (Performance reasons)
+~~*Note* Reactors are currently still streams1 streams (so they do not handle backpressure) but this will begin to change in the near future for node `0.12.x`. (Performance reasons)~~
 
 ### Primitives
 
