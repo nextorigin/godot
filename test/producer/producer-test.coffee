@@ -1,13 +1,10 @@
 ###
-# producer-test.js: Basic tests for the producer module.
-#
-# (C) 2012, Charlie Robbins, Jarrett Cruger, and the Contributors.
-#
+producer-test.js: Basic tests for the producer module.
+(C) 2012, Charlie Robbins, Jarrett Cruger, and the Contributors.
 ###
 
 
 {expect}   = require "chai"
-# errify     = require "errify"
 
 
 godot      = require "../../lib/godot"
