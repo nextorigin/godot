@@ -20,6 +20,7 @@ class Expire extends stream.Transform
     @ttl     or= 1000 * 60 * 5
     @expired   = false
     @resetTtl()
+    @on "end", @clearTimeout
 
   #
   # ### function write (data)
@@ -48,13 +49,16 @@ class Expire extends stream.Transform
   # Resets the TTL timeout for this instance.
   #
   resetTtl: ->
-    clearTimeout @ttlId if @ttlId
+    @clearTimeout()
     @ttlId = setTimeout @afterWait, @ttl
 
   afterWait: =>
-    clearTimeout @ttlId
+    @clearTimeout()
     @expired = true
-    @push @last
+    @push @last if @last?
+
+  clearTimeout: =>
+    clearTimeout @ttlId if @ttlId
 
 
 module.exports = Expire
