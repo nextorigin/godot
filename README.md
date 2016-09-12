@@ -1,7 +1,7 @@
 # godot2
 
-[![Build Status][ci-master]][travis-ci]
-[![Coverage Status][coverage-master]][coveralls]
+[![Build Status][ci-nextorigin]][travis-ci]
+[![Coverage Status][coverage-nextorigin]][coveralls]
 [![Dependency Status][dependency]][david]
 [![devDependency Status][dev-dependency]][david-dev]
 [![Downloads][downloads]][npm-package]
@@ -170,9 +170,9 @@ _Sound Wave designed by Alessandro Suraci from the thenounproject.com_
 [vows]: http://vowsjs.org/
 
 
-  [ci-master]: https://img.shields.io/travis/nextorigin/godot2/master.svg?style=flat-square
+  [ci-nextorigin]: https://img.shields.io/travis/nextorigin/godot2/nextorigin.svg?style=flat-square
   [travis-ci]: https://travis-ci.org/nextorigin/godot2
-  [coverage-master]: https://img.shields.io/coveralls/nextorigin/godot2/master.svg?style=flat-square
+  [coverage-nextorigin]: https://img.shields.io/coveralls/nextorigin/godot2/nextorigin.svg?style=flat-square
   [coveralls]: https://coveralls.io/r/nextorigin/godot2
   [dependency]: https://img.shields.io/david/nextorigin/godot2.svg?style=flat-square
   [david]: https://david-dm.org/nextorigin/godot2
