@@ -55,7 +55,7 @@
   },
   "scripts": {
     "test": "npm run test:modules && npm run test:coverage",
-    "test:modules": "mocha --recursive --compilers coffee:iced-coffee-script/register --require iced-coffee-coverage/register test/*/*.coffee",
+    "test:modules": "mocha --recursive --compilers coffee:iced-coffee-script/register --require iced-coffee-coverage/register-istanbul test/*/*.coffee",
     "test:coverage": "istanbul report",
     "build": "iced --bare --map --runtime node -o lib/ -c src/",
     "watch": "iced --watch --bare --map --runtime node -o lib/ -c src/",

@@ -5,7 +5,7 @@ net.js: Test helpers for working with `godot.net`.
 
 errify = require "errify"
 
-godot  = require "../../lib/godot"
+godot  = require "../../src/godot"
 #
 # ### function createServer (options, callback)
 # Creates a `godot` client with the specified `options`.
