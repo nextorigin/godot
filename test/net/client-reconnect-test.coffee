@@ -16,7 +16,6 @@ mocks      = require "../mocks"
 describe "godot/net/client-reconnect", ->
   describe "Godot client", ->
     type      = "tcp"
-    format    = "json"
     reconnect =
       retries: 2
       minDelay: 100
@@ -35,7 +34,7 @@ describe "godot/net/client-reconnect", ->
 
     describe "with no backoff and no server", ->
       it "should emit an error", (done) ->
-        client = godot.createClient {type, format, producers}
+        client = godot.createClient {type, producers}
 
         client.connect port, done
         await client.on "error", defer err
@@ -46,7 +45,7 @@ describe "godot/net/client-reconnect", ->
 
     describe "with backoff and no server", ->
       it "should emit an error", (done) ->
-        client  = godot.createClient {type, format, producers, reconnect}
+        client  = godot.createClient {type, producers, reconnect}
         d       = new Date
 
         client.connect port, done
@@ -61,7 +60,7 @@ describe "godot/net/client-reconnect", ->
     describe "with backoff and server eventually coming up", ->
       it "should send data", (done) ->
         ideally = errify done
-        client  = godot.createClient {type, format, producers, reconnect}
+        client  = godot.createClient {type, producers, reconnect}
         d       = new Date
 
         client.connect port, ideally ->

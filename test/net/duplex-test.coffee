@@ -16,10 +16,11 @@ mocks      = require "../mocks"
 
 shouldStartServer = (options, callback) ->
   ideally = errify callback
+  client  = godot.createClient options
 
   await fs.unlink "unix.sock", defer() if options.type is "unix"
   await helpers.net.createServer options, ideally defer server
-  await helpers.net.createClient options, ideally defer client
+  await client.connect ideally defer()
 
   expect(server.server).to.be.an "object"
   expect(client.socket).to.be.an "object"
@@ -91,6 +92,7 @@ describe "godot/net/duplex", ->
             expect(client.handlers).to.be.an "object"
 
             server.close()
+            client.close()
             done()
 
         describe "\"where-expire\" reactor over #{type.toUpperCase()} socket", ->
@@ -115,4 +117,5 @@ describe "godot/net/duplex", ->
             expect(client.handlers).to.be.an "object"
 
             server.close()
+            client.close()
             done()

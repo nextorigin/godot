@@ -56,9 +56,11 @@ describe "godot/net/client", ->
       describe "#{options.type.toUpperCase()} after the server is created", ->
         it "should send data to the server", (done) ->
           ideally = errify done
+          client  = godot.createClient options
+          client.on "error", done
 
           await shouldStartServer options, ideally defer server
-          await helpers.net.createClient options, ideally defer client
+          await client.connect ideally defer()
           await server.once "data", defer data
 
           expect(data).to.be.an "object"

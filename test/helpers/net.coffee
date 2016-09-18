@@ -6,32 +6,11 @@ net.js: Test helpers for working with `godot.net`.
 errify = require "errify"
 
 godot  = require "../../src/godot"
-#
-# ### function createServer (options, callback)
-# Creates a `godot` client with the specified `options`.
-#
-
-exports.createClient = (options, callback) ->
-  ideally = errify callback
-
-  options.type or= "tcp"
-  client = godot.createClient
-    type: options.type
-    producers: options.producers
-
-  switch options.type
-    when "tcp", "udp"
-      await client.connect options.port, (options.host or "localhost"), ideally defer()
-    when "unix"
-      await client.connect options.path, ideally defer()
-
-  callback null, client
 
 #
 # ### function createServer (options, callback)
 # Creates a `godot` server with the specified `options`.
 #
-
 exports.createServer = (options, callback) ->
   ideally = errify callback
 
@@ -48,6 +27,7 @@ exports.createServer = (options, callback) ->
       await server.listen options.path, ideally defer()
 
   callback null, server
+
 #
 # ### function getStreams (obj, name)
 # #### @obj {godot.net.Client|godot.net.Server} Object holding streams
@@ -55,7 +35,6 @@ exports.createServer = (options, callback) ->
 # Returns the set of instantiated streams on the `godot.net obj` filtering
 # for names (if any).
 #
-
 exports.getStreams = (obj, names) ->
   names = [names] if typeof names is "string"
 
@@ -80,6 +59,5 @@ exports.getStreams = (obj, names) ->
 # Returns a single instantiated stream on the `godot.net obj` with the
 # specified `name`.
 #
-
 exports.getStream = (obj, name) ->
   exports.getStreams(obj, name)[0]

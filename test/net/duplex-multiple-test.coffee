@@ -15,10 +15,11 @@ helpers    = require "../helpers"
 
 shouldStartServer = (options, callback) ->
   ideally = errify callback
+  client  = godot.createClient options
 
   await fs.unlink "unix.sock", defer() if options.type is "unix"
   await helpers.net.createServer options, ideally defer server
-  await helpers.net.createClient options, ideally defer client
+  await client.connect ideally defer()
 
   expect(server.server).to.be.an "object"
   expect(client.socket).to.be.an "object"
