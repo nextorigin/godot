@@ -59,7 +59,7 @@ class Where extends stream.Transform
   # is valid against `this.filters`.
   #
   filter: (data) ->
-    @_filterKeys.every (key) ->
+    @_filterKeys.every (key) =>
       filter = @_filters[key]
       value  = data[key]
       if filter.match and (filter.match.test value) or filter.isValid and (filter.isValid value) or filter.target is value then true else false
@@ -105,7 +105,7 @@ class Where extends stream.Transform
   #
   _setFilters: (filters) ->
     @_filterKeys = Object.keys(filters)
-    @_filters = @_filterKeys.reduce(((all, key) ->
+    @_filters = @_filterKeys.reduce(((all, key) =>
       all[key] = {}
       @_setTarget filters[key], all[key]
       all
