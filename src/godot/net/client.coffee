@@ -11,12 +11,12 @@ tls    = require "tls"
 back   = require "back/reconnect"
 ip     = require "ip"
 uuid   = require "node-uuid"
-utile  = require "utile"
-utils  = require "../common/utils"
 ndjson = require "ndjson"
-{log}  = utils
-{noop} = utils
-{clone} = utile
+
+
+clone  = (obj, copy = {}) ->
+  copy[key] = value for key, value of obj
+  copy
 
 
 #

@@ -11,8 +11,6 @@ tls        = require "tls"
 ndjson     = require "ndjson"
 uuid       = require "node-uuid"
 Socket     = require "./socket"
-common     = require "../../../lib/godot/common"
-# {log}      = require "../../../lib/godot/common/utils"
 
 
 #
@@ -65,12 +63,13 @@ class Server extends events.EventEmitter
     @reactors  = {}
     @hosts     = {}
     @[key]     = options[key] for key in @validSettings
+    @log     or= ->
     @format  or= "json"
     @host    or= "0.0.0.0"
     @multiplex ?= true
     @_reactors = options.reactors
 
-    # log "initalizing #{if @multiplex then 'multiplex ' else ''}godot server"
+    @log "initalizing #{if @multiplex then 'multiplex ' else ''}godot server"
     @add reactor for reactor in @_reactors if Array.isArray @_reactors
     @createReactors "default" unless @multiplex
 
@@ -89,7 +88,6 @@ class Server extends events.EventEmitter
     # or something like that
     #
     reactor.id or= uuid.v4()
-    # log "adding reactor #{reactor.id}"
     @reactors[reactor.id] = reactor
 
     #
@@ -216,7 +214,6 @@ class Server extends events.EventEmitter
   # the socket ends up writing to
   #
   createReactor: (id) =>
-    # log "creating reactor for #{id}"
     socket = new Socket
     socket.pipe @reactors[id]
 
@@ -230,7 +227,6 @@ class Server extends events.EventEmitter
   #
   createReactors: (id) ->
     return if @hosts[id]
-    # log "creating reactors for #{id}"
 
     #
     # Remark: If we are not creating a new set of streams

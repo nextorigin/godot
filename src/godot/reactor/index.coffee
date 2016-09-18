@@ -6,8 +6,13 @@
 #
 fs    = require "fs"
 path  = require "path"
-utile = require "utile"
-{log} = require "../common/utils"
+
+
+camelize = (str) ->
+  ((str.split /[\W_-]/).map capitalize).join ""
+
+capitalize = (str) ->
+  str[0].toUpperCase() + str[1..]
 
 #
 # Core files which should not be exported as reactors.
@@ -31,21 +36,18 @@ reactor = (godot) ->
     name    = file.replace /.js$/, ""
     parts   = name.split "-"
     method  = parts[0]
-    method += utile.capitalize parts[1] if parts.length > 1
+    method += (parts[1..].map camelize).join "" if parts.length > 1
 
-    # log "loading reactor #{name}"
     try
       godot[method] = require "./#{name}"
     catch
 
-  console.log "now with coffee"
   for file in fs.readdirSync __dirname + "/../../../src/godot/reactor" when file not in core and (path.extname file) is ".coffee"
     name    = file.replace /.coffee$/, ""
     parts   = name.split "-"
     method  = parts[0]
-    method += utile.capitalize parts[1] if parts.length > 1
+    method += (parts[1..].map camelize).join "" if parts.length > 1
 
-    # log "loading reactor #{name}"
     godot[method] = require "./#{name}"
 
   return
