@@ -118,7 +118,7 @@ class Server extends events.EventEmitter
     #
     # TODO: Remove this reactor from the running set
     #
-    return this
+    this
 
   argError: (arg) ->
     err = new Error "#{arg} is required to listen"
@@ -205,7 +205,7 @@ class Server extends events.EventEmitter
       when "tcp", "tls", "unix" then @server.close callback
       else @server.close()
 
-    return this
+    this
 
   #
   # ### function createReactor
@@ -240,7 +240,7 @@ class Server extends events.EventEmitter
 
     @hosts[id] = (@createReactor key for key, val of @reactors)
 
-    return this
+    this
 
   createParser: ->
     switch @format

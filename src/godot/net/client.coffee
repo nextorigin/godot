@@ -114,7 +114,7 @@ class Client extends stream.Transform
     producer.removeListener "end", @handlers.end[id]
     delete @producers[id]
     delete @handlers.end[id]
-    return this
+    this
 
   argError: ->
     err = new Error "#{arg} is required to connect"
@@ -153,7 +153,7 @@ class Client extends stream.Transform
   fail: ->
     @terminate = true
     @attempt = null
-    return @emit "error", @_lastErr
+    @emit "error", @_lastErr
 
   back: (fail, backoff) =>
     return @fail() if fail
@@ -181,7 +181,6 @@ class Client extends stream.Transform
         @serializer.on "data", @_sendOverUDP
 
     @emit "connect"
-    return
 
   cleanup: =>
     switch @type
@@ -218,7 +217,7 @@ class Client extends stream.Transform
     @socket.on "connect", @respond
     @socket.on "close", @cleanup
 
-    return this
+    this
 
   #
   # ### function close ()
@@ -232,7 +231,7 @@ class Client extends stream.Transform
       else @socket.close()
 
     @remove producer for id, producer of @producers
-    return this
+    this
 
   createSerializer: ->
     switch @format
