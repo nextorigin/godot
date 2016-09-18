@@ -4,14 +4,16 @@
 # * (C) 2012, Nodejitsu Inc.
 # *
 #
-events = require "events"
+stream = require "readable-stream"
 dgram  = require "dgram"
 net    = require "net"
 tls    = require "tls"
+util   = require "util"
 back   = require "back/reconnect"
 ip     = require "ip"
 uuid   = require "node-uuid"
 ndjson = require "ndjson"
+extend = util._extend
 
 
 clone  = (obj, copy = {}) ->
@@ -29,9 +31,9 @@ clone  = (obj, copy = {}) ->
 # Constructor function for the Client object responsible for managing
 # Producers attached to a TCP or UDP client.
 #
-class Client extends events.EventEmitter
+class Client extends stream.Transform
   #
-  # Inherit from EventEmitter
+  # Inherit from TransformStream
   #
 
   validTypes: [
@@ -61,12 +63,12 @@ class Client extends events.EventEmitter
     unless !options.reconnect or typeof options.reconnect is "object"
       return "Reconnect must be a defined object if used"
 
-  constructor: (options) ->
+  constructor: (options, streamOptions = {}) ->
     throw new Error err if err = @validate options
-    super()
+    super extend streamOptions, objectMode: true
 
     @producers  = {}
-    @handlers   = data: {}, end: {}
+    @handlers   = end: {}
     @[key]      = options[key] for key in @validSettings
     @format   or= "json"
     @host     or= "0.0.0.0"
@@ -83,14 +85,8 @@ class Client extends events.EventEmitter
       ttl: 15000
 
     @add producer for producer in @_producers if Array.isArray @_producers
-
-  _writeWhenAvailable: (data) =>
-      #
-      # Ignore data until we have a socket
-      #
-      return unless @socket
-      @write data
-      return
+    @serializer = @createSerializer()
+    @pipe @serializer
 
   #
   # ### function add (producer)
@@ -102,9 +98,9 @@ class Client extends events.EventEmitter
   add: (producer) ->
     id = producer.id or= uuid.v4()
     @producers[id] = producer
-    producer.on "data", @handlers.data[id] = @_writeWhenAvailable
+    producer.pipe this, end: false
     producer.on "end", @handlers.end[id] = => @remove producer, id
-    return this
+    this
 
   #
   # ### function remove (producer)
@@ -114,10 +110,9 @@ class Client extends events.EventEmitter
   # network connection.
   #
   remove: (producer, id = producer.id) ->
-    producer.removeListener "data", @handlers.data[id]
+    producer.unpipe this
     producer.removeListener "end", @handlers.end[id]
     delete @producers[id]
-    delete @handlers.data[id]
     delete @handlers.end[id]
     return this
 
@@ -135,7 +130,7 @@ class Client extends events.EventEmitter
       when "number"   then port = arg
       when "string"   then host = arg
       when "function" then @callback = arg
-    @callback or= noop
+    @callback or= ->
 
     # Split cases due to unix using `this.path`
     switch @type
@@ -178,8 +173,24 @@ class Client extends events.EventEmitter
     #
     @terminate = false
     @attempt = null
+
+    switch @type
+      when "tcp", "tls", "unix"
+        @serializer.pipe @socket, end: false
+      when "udp"
+        @serializer.on "data", @_sendOverUDP
+
     @emit "connect"
     return
+
+  cleanup: =>
+    switch @type
+      when "tcp", "tls", "unix"
+        @serializer.unpipe @socket
+      when "udp"
+        @serializer.removeListener "data", @_sendOverUDP
+
+    @emit "disconnect"
 
   #
   # ### function connect (callback)
@@ -199,11 +210,13 @@ class Client extends events.EventEmitter
       when "udp"
         @socket = dgram.createSocket "udp4"
         process.nextTick @callback
+        process.nextTick @respond
       when "unix"
         @socket = net.connect {@path}, @callback
 
     @socket.on "error", @socketError
     @socket.on "connect", @respond
+    @socket.on "close", @cleanup
 
     return this
 
@@ -234,20 +247,12 @@ class Client extends events.EventEmitter
   # Writes the specified `data` to the underlying network
   # connection associated with this client.
   #
-  write: (data) ->
-    return unless @socket
-
-    serializer = @createSerializer()
-
-    switch @type
-      when "tcp", "tls", "unix"
-        serializer.pipe @socket, end: false
-      when "udp"
-        serializer.once "data", @_sendOverUDP
-
-    serializer.write data
-    serializer.end()
-    return this
+  _transform: (data, encoding, done) ->
+    #
+    # Ignore data until we have a socket
+    #
+    @push data if @socket
+    done()
 
   #
   # ### function produce (data)
@@ -271,7 +276,7 @@ class Client extends events.EventEmitter
     #
     @defaults["time"] = Date.now()
     data = (if Array.isArray data then data.map defaultify else defaultify data)
-    @write data
+    @push data
 
 
 module.exports = Client
