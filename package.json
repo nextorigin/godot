@@ -34,6 +34,7 @@
     "collect-stream": "^1.1.1",
     "concat-stream": "^1.5.2",
     "coveralls": "^2.11.12",
+    "graphite": "~0.0.6",
     "iced-coffee-coverage": "^1.0.3",
     "iced-coffee-script": "^108.0.11",
     "istanbul": "^0.4.5",
@@ -43,6 +44,9 @@
     "one-time": "0.0.4",
     "optimist": "~0.6.0",
     "r...e": "~0.2.0",
+    "redis": "~2.6.2",
+    "sendgrid-web": "~0.0.5",
+    "telenode": "~0.0.3",
     "vows": "~0.8.1"
   },
   "peerDependencies": {
