@@ -30,6 +30,7 @@
     "redis": "~2.6.2",
     "sendgrid-web": "~0.0.5",
     "telenode": "~0.0.3",
+    "utile": "^0.3.0",
     "window-stream": "~0.7.4"
   },
   "devDependencies": {
