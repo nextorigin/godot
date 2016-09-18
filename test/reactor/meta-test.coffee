@@ -15,7 +15,6 @@ range      = require "r...e"
 windowStream = require "window-stream"
 
 helpers    = require "../helpers"
-macros     = require("../macros").reactor
 
 
 M1_ALPHA = 1 - Math.exp(-5 / 60)

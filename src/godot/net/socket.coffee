@@ -1,6 +1,6 @@
 util     = require "util"
 stream   = require "readable-stream"
-{clone}  = require "../../../lib/godot/common"
+clone    = require "clone"
 extend   = util._extend
 
 

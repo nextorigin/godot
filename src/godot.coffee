@@ -25,13 +25,6 @@ require('./godot/reactor') exports
 exports.producer = require('./godot/producer')
 
 #
-# ### @common {Object}
-# Expose `common` module for performing basic
-# streaming.
-#
-exports.common = require('../lib/godot/common')
-
-#
 # ### @math {Object}
 # Expose `math` module for performing basic
 # math on sets of events.

@@ -7,7 +7,7 @@ by.js: Stream for creating a new set of streams based on a key change
 stream = require "readable-stream"
 
 
-FilterStream = require "../../../lib/godot/common/filter-stream"
+FilterStream = require "./filter-stream"
 #
 # ### function By (keys, reactor)
 # #### @key {string|Array} Particular key to listen for a change

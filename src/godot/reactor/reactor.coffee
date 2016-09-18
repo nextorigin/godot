@@ -6,7 +6,8 @@
 #
 events = require "events"
 uuid   = require "node-uuid"
-ReadWriteStream = require "../../../lib/godot/common/read-write-stream"
+stream = require "readable-stream"
+
 
 #reactor
 # ### function Reactor ()
@@ -38,7 +39,7 @@ class Reactor extends events.EventEmitter
   # Instantiates a new and unique pipe-chain for the reactors
   # associated with this instance.
   #
-  createStream: (source = new ReadWriteStream) ->
+  createStream: (source = new stream.PassThrough) ->
     source.on "error", @emit.bind this, "error"
     @reactors.reduce @chainReactors, source
 
