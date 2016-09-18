@@ -21,6 +21,7 @@ exports.writeFixture = function (stream, fixture) {
     ? fixtures[fixture]
     : fixture
 
+  fixture = JSON.parse(JSON.stringify(fixture))
   fixture.forEach(function (data) {
     stream.write(data);
   });
