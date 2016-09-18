@@ -53,7 +53,7 @@
   },
   "main": "./lib/godot",
   "engines": {
-    "node": "0.10.x"
+    "node": ">=0.12.0"
   },
   "scripts": {
     "test": "npm run test:modules && npm run test:coverage",
