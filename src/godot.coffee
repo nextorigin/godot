@@ -22,7 +22,7 @@ require('./godot/reactor') exports
 # Expose `producer` module for creating events
 # to process and react to.
 #
-exports.producer = require('../lib/godot/producer')
+exports.producer = require('./godot/producer')
 
 #
 # ### @common {Object}
