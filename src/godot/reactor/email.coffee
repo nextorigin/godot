@@ -28,12 +28,16 @@ class Email extends stream.Transform
       throw new Error "options.auth (or options.client), options.from, and options.to are required"
 
     @_last = 0
-    #
-    # TODO: Support templating of these strings.
-    #
+
     @body    or= ""
-    @subject or= "Godot error"
+    @subject or= "Godot error for %host%:%service%"
     @client  or= new SendGrid @auth
+
+  template: (str) ->
+    for key, value of @values when key isnt "meta"
+      variable = new RegExp "%#{key}%"
+      str      = str.replace variable, value.toString()
+    str
 
   #
   # ### function write (data)
@@ -41,14 +45,17 @@ class Email extends stream.Transform
   # Sends an email with the specified `data`.
   #
   _transform: (data, encoding, done) ->
-    text = JSON.stringify data, null, 2
     #
     # Return immediately if we have sent an email
     # in a time period less than `this.interval`.
     #
     return if @interval and @_last and new Date - (@_last) <= @interval
 
-    text = @body + "\n\n" + text
+    timestamp = (new Date @time).toUTCString()
+    subject   = @template @subject
+    body      = @template @body
+    text      = JSON.stringify data, null, 2
+    text      = @timestamp + "\n\n" + @body + "\n\n" + text
     await @client.send {@to, @from, @subject, text}, defer err
 
     @_last = new Date
