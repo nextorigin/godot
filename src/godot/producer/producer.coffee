@@ -31,6 +31,8 @@ class Producer extends stream.PassThrough
     ttl = if typeof options.ttl is "number" then options.ttl else @defaults.ttl
     @ttl ttl
 
+    @_streaming = options.streaming
+
   #
   # ### @defaults {Object}
   # Default values for properties on events
@@ -75,7 +77,12 @@ class Producer extends stream.PassThrough
       # matches expected type. Allow for undefined values.
       #
       if type is "array" and Array.isArray(value) or type is valueType or valueType is "undefined"
+        #
+        # Only set the TTL if it has a real value that is
+        # different from the current TTL.
+        #
         if key is "ttl" and typeof value is "number" and value isnt @values.ttl
+
           #
           # If the ttl is set to zero then pummell emit data
           #
@@ -86,13 +93,10 @@ class Producer extends stream.PassThrough
                 tickProduce()
             tickProduce()
 
-          #
-          # Only set the TTL if it has a real value that is
-          # different from the current TTL.
-          #
-          if @ttlId
-            clearInterval @ttlId
-          @ttlId = setInterval (=> @produce()), value
+          unless @_streaming
+            if @ttlId
+              clearInterval @ttlId
+            @ttlId = setInterval (=> @produce()), value
 
         @values[key] = value
         return this
