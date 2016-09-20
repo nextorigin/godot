@@ -17,7 +17,7 @@ tick   = if typeof setImmediate is "undefined" then process.nextTick else setImm
 #
 class Producer extends stream.PassThrough
   constructor: (options = {}, streamOptions = {}) ->
-    super extend streamOptions, objectMode: true
+    super extend {objectMode: true}, streamOptions
 
     @values = {}
     #
