@@ -45,14 +45,14 @@
     "optimist": "~0.6.0",
     "r...e": "~0.2.0",
     "redis": "~2.6.2",
-    "sendgrid-web": "~0.0.5",
+    "sendgrid": "~4.3.0",
     "telenode": "~0.0.3",
     "vows": "~0.8.1"
   },
   "peerDependencies": {
     "graphite": "~0.0.6",
     "redis": "~2.6.2",
-    "sendgrid-web": "~0.0.5",
+    "sendgrid": "~4.3.0",
     "telenode": "~0.0.3"
   },
   "main": "./lib/godot",

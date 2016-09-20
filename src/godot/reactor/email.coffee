@@ -5,7 +5,28 @@ email.js: Stream responsible for sending emails on data events.
 
 
 stream   = require "readable-stream"
-SendGrid = require "sendgrid-web"
+errify   = require "errify"
+SendGrid = require "sendgrid"
+helper   = (require "sendgrid").mail
+
+
+class Sender
+  constructor: (@apiKey) ->
+    @client = SendGrid @apiKey
+
+  send: ({to, from, subject, text}, callback) ->
+    ideally    = errify calback
+
+    from_email = new helper.Email from
+    to_email   = new helper.Email to
+    content    = new helper.Content 'text/plain', text
+    mail       = new helper.Mail from_email, subject, to_email, content
+    request    = client.emptyRequest(
+      method: 'POST'
+      path: '/v3/mail/send'
+      body: mail.toJSON())
+
+    client.API request, callback
 
 #
 # ### function Email (options)
@@ -31,7 +52,7 @@ class Email extends stream.Transform
 
     @body    or= ""
     @subject or= "Godot error for %host%:%service%"
-    @client  or= new SendGrid @auth
+    @client  or= new Sender @auth
 
   template: (str) ->
     for key, value of @values when key isnt "meta"
