@@ -60,6 +60,7 @@ class Producer extends stream.PassThrough
     tags:           "array"
     metric:         "number"
     ttl:            "number"
+    meta:           "object"
 
   #
   # ### function host|service|state|description|tags|metric (value)
@@ -121,6 +122,7 @@ class Producer extends stream.PassThrough
       tags:          @values.tags
       metric:        @values.metric
       ttl:           @values.ttl
+      meta:          @values.meta
 
 
 module.exports = Producer
