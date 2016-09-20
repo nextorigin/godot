@@ -46,6 +46,7 @@
     "r...e": "~0.2.0",
     "redis": "~2.6.2",
     "sendgrid": "~4.3.0",
+    "slack-notify": "^0.1.6",
     "telenode": "~0.0.3",
     "vows": "~0.8.1"
   },
@@ -53,6 +54,7 @@
     "graphite": "~0.0.6",
     "redis": "~2.6.2",
     "sendgrid": "~4.3.0",
+    "slack-notify": "^0.1.6",
     "telenode": "~0.0.3"
   },
   "main": "./lib/godot",
