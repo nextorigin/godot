@@ -116,7 +116,7 @@ class Client extends stream.Transform
     delete @handlers.end[id]
     this
 
-  argError: ->
+  argError: (arg) ->
     err = new Error "#{arg} is required to connect"
     return (@callback err) if @callback
     @emit "error", err
