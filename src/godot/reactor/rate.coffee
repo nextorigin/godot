@@ -53,6 +53,7 @@ class Rate extends stream.Transform
     data        = clone @last
     data.metric = @sum / @size
     data.time   = +Date.now()
+    data.ttl    = @interval
 
     @sum        = 0
     @size       = 0
