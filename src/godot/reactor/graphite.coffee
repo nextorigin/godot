@@ -44,7 +44,7 @@ class Map extends stream.Transform
 
     @url      = options.url
     @prefix   = options.prefix or "godot"
-    @interval = options.interval or 60000
+    @interval = options.interval or 60
     @meta     = options.meta or null
     @_last    = 0
     @client   = options.client or graphite.createClient(@url)
@@ -63,7 +63,7 @@ class Map extends stream.Transform
     # Return immediately if we have sent a metric
     # in a time period less than `this.interval`.
     #
-    return done() if @interval and @_last and (now - @_last) <= @interval
+    return done() if @interval and @_last and (now - @_last) <= @interval * 1000
 
     metricName          = util.format "%s.%s.%s",
       @prefix,

@@ -82,7 +82,7 @@ class Client extends stream.Transform
       tags: []
       metric: 1
       meta: {}
-      ttl: 15000
+      ttl: 15
 
     @add producer for producer in @_producers if Array.isArray @_producers
     @serializer = @createSerializer()

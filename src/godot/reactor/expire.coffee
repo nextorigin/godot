@@ -17,7 +17,7 @@ class Expire extends stream.Transform
   constructor: (@ttl) ->
     super objectMode: true
 
-    @ttl     or= 1000 * 60 * 5
+    @ttl     or= 60 * 5
     @expired   = false
     @resetTtl()
     @on "end", @clearTimeout
@@ -50,7 +50,7 @@ class Expire extends stream.Transform
   #
   resetTtl: ->
     @clearTimeout()
-    @ttlId = setTimeout @afterWait, @ttl
+    @ttlId = setTimeout @afterWait, @ttl * 1000
 
   afterWait: =>
     @clearTimeout()

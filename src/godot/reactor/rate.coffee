@@ -45,7 +45,7 @@ class Rate extends stream.Transform
   #
   resetInterval: ->
     clearInterval @intervalId if @intervalId
-    @intervalId = setInterval @rate, @interval
+    @intervalId = setInterval @rate, @interval * 1000
 
   rate: =>
     return unless @size

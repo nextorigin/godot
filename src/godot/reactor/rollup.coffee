@@ -29,7 +29,7 @@ class Rollup extends stream.Transform
         limit: limit
 
     @limit      = options.limit or 100
-    @interval   = options.interval or 1000 * 60 * 60
+    @interval   = options.interval or 60 * 60
     @forceReset = typeof interval is "function"
     @duration   = 0
     @period     = 0
@@ -67,7 +67,7 @@ class Rollup extends stream.Transform
       clearInterval @intervalId
       delete @intervalId
 
-    @intervalId = setInterval (@rollup.bind this, nextInterval), nextInterval
+    @intervalId = setInterval (@rollup.bind this, nextInterval), nextInterval * 1000
 
   rollup: (nextInterval) =>
     if @events.length

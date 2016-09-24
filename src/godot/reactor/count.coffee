@@ -42,7 +42,7 @@ class Count extends stream.Transform
   #
   resetInterval: ->
     clearInterval @intervalId if @intervalId
-    @intervalId = setInterval @count, @interval
+    @intervalId = setInterval @count, @interval * 1000
 
   count: =>
     return unless @count
@@ -50,7 +50,7 @@ class Count extends stream.Transform
     data.metric = @count
     data.time   = +Date.now()
     data.tags   = data.tags or []
-    data.tags.push "per #{@interval / 1000}s"
+    data.tags.push "per #{@interval}s"
     @count      = 0
     @last       = null
     @push data

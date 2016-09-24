@@ -28,7 +28,7 @@ class Throttle extends stream.Transform
         interval: interval
 
     @max      = options.max or 10
-    @interval = options.interval or 1000 * 60 * 5
+    @interval = options.interval or 60 * 5
     @length   = 0
 
   #
@@ -55,7 +55,7 @@ class Throttle extends stream.Transform
   #
   resetInterval: ->
     clearInterval @intervalId if @intervalId
-    @intervalId = setInterval (=> @length = 0), @interval
+    @intervalId = setInterval (=> @length = 0), @interval * 1000
 
 
 module.exports = Throttle

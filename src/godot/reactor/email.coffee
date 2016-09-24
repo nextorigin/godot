@@ -70,7 +70,7 @@ class Email extends stream.Transform
     # Return immediately if we have sent an email
     # in a time period less than `this.interval`.
     #
-    return if @interval and @_last and new Date - (@_last) <= @interval
+    return if @interval and @_last and new Date - (@_last) <= @interval * 1000
 
     timestamp = (new Date @time).toUTCString()
     subject   = @template @subject

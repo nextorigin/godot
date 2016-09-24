@@ -54,7 +54,7 @@ class Sms extends stream.Transform
     # Return immediately if we have sent an email
     # in a time period less than `this.interval`.
     #
-    return done() if @interval and @_last and (new Date - @_last) <= @interval
+    return done() if @interval and @_last and (new Date - @_last) <= @interval * 1000
 
     ideally = errify (err) => @emit "reactor:error", err
     text    = JSON.stringify data

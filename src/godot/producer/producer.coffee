@@ -44,7 +44,7 @@ class Producer extends stream.PassThrough
     description:    "No description"
     tags:           []
     metric:         1
-    ttl:            15000
+    ttl:            15
 
   #
   # ### @types {Object}
@@ -97,7 +97,7 @@ class Producer extends stream.PassThrough
           unless @_streaming
             if @ttlId
               clearInterval @ttlId
-            @ttlId = setInterval (=> @produce()), value
+            @ttlId = setInterval (=> @produce()), value * 1000
 
         @values[key] = value
         return this
