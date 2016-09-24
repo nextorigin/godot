@@ -45,6 +45,7 @@ class Producer extends stream.PassThrough
     tags:           []
     metric:         1
     ttl:            15
+    meta:           undefined
 
   #
   # ### @types {Object}
