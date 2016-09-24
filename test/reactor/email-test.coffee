@@ -53,7 +53,7 @@ describe "godot/reactor/email", ->
         reactor    = new godot.where "service", "*/health/heartbeat"
         mailer     = new godot.email
           to: "info@health.com"
-          interval: 60 * 60 * 1000
+          interval: 60 * 60
           from: "health@godot.com"
           subject: "Memory report"
           client: mocks.email

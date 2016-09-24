@@ -32,6 +32,6 @@ exports.writeFixture = (stream, fixture) ->
 exports.writeFixtureTtl = (stream, name, ttl) ->
   for fixture in fixtures[name]
     stream.write fixture if stream.writable
-    await setTimeout defer(), ttl
+    await setTimeout defer(), ttl * 1000
 
   stream.end()

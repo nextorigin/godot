@@ -51,7 +51,7 @@ describe "godot/reactor/sms", ->
         reactor    = new godot.where "service", "*/health/heartbeat"
         sms        = new godot.sms
           to: "800OKGODOT"
-          interval: 60 * 60 * 1000
+          interval: 60 * 60
           from: "800GOGODOT"
           client: mocks.sms
 

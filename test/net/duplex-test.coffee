@@ -33,8 +33,8 @@ shouldStartServer = (options, callback) ->
 describe "godot/net/duplex", ->
   describe "Godot duplex", ->
     describe "where & where + expire", ->
-      ttl = 200
-      whereExpire      = (new godot.where "service", "godot/test").pipe new godot.expire 200
+      ttl = 0.2
+      whereExpire      = (new godot.where "service", "godot/test").pipe new godot.expire 0.2
       where            = (new godot.where "service", "godot/test")
       reactors = [
         whereExpire

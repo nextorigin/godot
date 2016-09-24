@@ -19,7 +19,7 @@ function start(options) {
     reactors:  [
       function (socket) {
         socket
-          .pipe(godot.count((options.interval || options.duration) * 1000))
+          .pipe(godot.count(options.interval || options.duration))
           .pipe(godot.console(function (data) {
             console.log([
               '',

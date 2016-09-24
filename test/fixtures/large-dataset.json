@@ -1,506 +1,506 @@
 [
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/memory",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
-  },
-  {
-    "service": "charlie/app/health/memory",
-    "ttl": 50
-  },
-  {
-    "service": "charlie/app/health/heartbeat",
-    "ttl": 50
-  },
-  {
-    "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/memory",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
-  },
-  {
-    "service": "charlie/app/health/memory",
-    "ttl": 50
-  },
-  {
-    "service": "charlie/app/health/heartbeat",
-    "ttl": 50
-  },
-  {
-    "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/memory",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
-  },
-  {
-    "service": "charlie/app/health/memory",
-    "ttl": 50
-  },
-  {
-    "service": "charlie/app/health/heartbeat",
-    "ttl": 50
-  },
-  {
-    "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/memory",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
-  },
-  {
-    "service": "charlie/app/health/memory",
-    "ttl": 50
-  },
-  {
-    "service": "charlie/app/health/heartbeat",
-    "ttl": 50
-  },
-  {
-    "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/memory",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
-  },
-  {
-    "service": "charlie/app/health/memory",
-    "ttl": 50
-  },
-  {
-    "service": "charlie/app/health/heartbeat",
-    "ttl": 50
-  },
-  {
-    "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/memory",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/memory",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/memory",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/memory",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/memory",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/memory",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/memory",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/memory",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/memory",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/memory",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/memory",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/memory",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/memory",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/memory",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/memory",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/memory",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/memory",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/memory",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/memory",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/memory",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/memory",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/memory",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/memory",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/memory",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/memory",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/memory",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/memory",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/memory",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/memory",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/memory",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/memory",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/memory",
-    "ttl": 50
+    "ttl": 0.05
   },
   {
     "service": "charlie/app/health/heartbeat",
-    "ttl": 50
+    "ttl": 0.05
+  },
+  {
+    "service": "charlie/app/health/heartbeat",
+    "ttl": 0.05
+  },
+  {
+    "service": "charlie/app/health/memory",
+    "ttl": 0.05
+  },
+  {
+    "service": "charlie/app/health/heartbeat",
+    "ttl": 0.05
+  },
+  {
+    "service": "charlie/app/health/heartbeat",
+    "ttl": 0.05
+  },
+  {
+    "service": "charlie/app/health/memory",
+    "ttl": 0.05
+  },
+  {
+    "service": "charlie/app/health/heartbeat",
+    "ttl": 0.05
+  },
+  {
+    "service": "charlie/app/health/heartbeat",
+    "ttl": 0.05
+  },
+  {
+    "service": "charlie/app/health/memory",
+    "ttl": 0.05
+  },
+  {
+    "service": "charlie/app/health/heartbeat",
+    "ttl": 0.05
+  },
+  {
+    "service": "charlie/app/health/heartbeat",
+    "ttl": 0.05
+  },
+  {
+    "service": "charlie/app/health/memory",
+    "ttl": 0.05
+  },
+  {
+    "service": "charlie/app/health/heartbeat",
+    "ttl": 0.05
+  },
+  {
+    "service": "charlie/app/health/heartbeat",
+    "ttl": 0.05
+  },
+  {
+    "service": "charlie/app/health/memory",
+    "ttl": 0.05
+  },
+  {
+    "service": "charlie/app/health/heartbeat",
+    "ttl": 0.05
   }
 ]

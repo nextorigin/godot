@@ -105,7 +105,7 @@ describe "godot/reactor/window", ->
         await
           collect reactor, ideally defer data
           helpers.reactor.writeFixture source, fixture
-          setTimeout (reactor.end.bind reactor), 600
+          setTimeout (reactor.end.bind reactor), 0.6 * 1000
 
         expect(data).to.have.length length
         expect(data[0]).to.have.length 10

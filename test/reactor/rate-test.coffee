@@ -27,13 +27,13 @@ describe "godot/reactor/rate", ->
       ideally    = errify done
       fixture    = "pings"
       length     = 1
-      reactor    = new godot.rate 50
+      reactor    = new godot.rate 0.05
 
       source.pipe reactor, end: false
       await
         collect reactor, ideally defer data
         helpers.writeFixture source, fixture
-        setTimeout (reactor.end.bind reactor), 60
+        setTimeout (reactor.end.bind reactor), 0.06 * 1000
 
       expect(data).to.have.length length
       expect(data[0].metric).to.equal 1

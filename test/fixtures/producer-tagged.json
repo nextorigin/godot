@@ -5,5 +5,5 @@
   "description": "Waiting to test\nGodot",
   "tags": ["a", "b"],
   "metric": 1,
-  "ttl": 10
+  "ttl": 0.01
 }

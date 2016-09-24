@@ -31,7 +31,7 @@ shouldStartServer = (options, callback) ->
 
 describe "godot/net/duplex/multiple", ->
   describe "Godot duplex: tagged", ->
-    ttl = 200
+    ttl = 2
     reactors = [
       new godot.taggedAll "a", "b"
     ]

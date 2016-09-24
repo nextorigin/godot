@@ -13,7 +13,7 @@ helpers    = require("../helpers").reactor
 
 
 describe "godot/reactor/expire", ->
-  describe "Godot aggregate, ttl 100ms", ->
+  describe "Godot aggregate, ttl 0.1s", ->
     source = null
 
     beforeEach ->
@@ -22,32 +22,32 @@ describe "godot/reactor/expire", ->
     afterEach ->
       source = null
 
-    describe "sent 200ms", ->
+    describe "sent 0.2s", ->
       it "should get expired event", (done) ->
         ideally    = errify done
         fixture    = "health"
-        reactor    = new godot.expire 100
+        reactor    = new godot.expire 0.1
 
         source.pipe reactor
         await
           reactor.on "data", defer data
-          helpers.writeFixtureTtl source, fixture, 200
+          helpers.writeFixtureTtl source, fixture, 0.2
 
         expect(data).to.be.an "object"
         expect(reactor.readable).to.be.true
         done()
 
-    describe "sent 50ms", ->
+    describe "sent 0.05s", ->
       it "should not expire", (done) ->
         ideally    = errify done
         fixture    = "health"
-        reactor    = new godot.expire 100
+        reactor    = new godot.expire 0.1
 
         source.pipe reactor
         await
           reactor.on "data", -> done new Error "Did expire"
           reactor.on "end", defer()
-          helpers.writeFixtureTtl source, fixture, 50
+          helpers.writeFixtureTtl source, fixture, 0.05
 
         expect(reactor).to.be.an.instanceof stream.Stream
         done()
