@@ -23,6 +23,7 @@ describe "godot/producer", ->
         "tags"
         "metric"
         "ttl"
+        "meta"
       ]
       for method in methods
         expect(Producer::[method]).to.be.a "function"
@@ -76,7 +77,7 @@ describe "godot/producer", ->
             number: -> '0'
             array:  -> 0
 
-          for key, type of Producer.prototype.types
+          for key, type of Producer.prototype.types when key isnt "meta"
             invalid = factory[type]()
             thrower = -> producer[key] invalid
             expect(thrower).to.throw new RegExp "Type mismatch: #{key} must be a #{type}"
