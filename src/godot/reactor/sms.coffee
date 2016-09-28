@@ -56,14 +56,18 @@ class Sms extends stream.Transform
     #
     return done() if @interval and @_last and (new Date - @_last) <= @interval * 1000
 
-    ideally = errify (err) => @emit "reactor:error", err
     text    = JSON.stringify data
     sms     = {@from, @to, body: "#{@body} #{text}"}
 
-    await @client.SMS.send sms, ideally defer()
-    @_last = new Date
-    @push data
+    await @client.SMS.send sms, defer err
+
+    if err then @error err
+    else
+      @push data
+      @_last = new Date
     done()
+
+  error: (err) => @emit "reactor:error", err
 
 
 module.exports = Sms

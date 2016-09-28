@@ -6,7 +6,6 @@ slack.js: Stream responsible for sending events to Slack in human-readable form.
 
 stream = require "readable-stream"
 Notify = require "slack-notify"
-errify = require "errify"
 
 
 #
@@ -40,11 +39,10 @@ class Slack extends stream.Transform
   # Emits data after it is mutating with `this.mapFn`.
   #
   _transform: (data, encoding, done) ->
-    ideally = errify @error
+    await @notify (@format data), defer err
 
-    await @notify (@format data), ideally defer()
-
-    @push data
+    if err then @error err
+    else        @push data
     done()
 
   error: (err) => @emit "reactor:error", err

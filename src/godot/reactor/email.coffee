@@ -70,20 +70,23 @@ class Email extends stream.Transform
     # Return immediately if we have sent an email
     # in a time period less than `this.interval`.
     #
-    return if @interval and @_last and new Date - (@_last) <= @interval * 1000
+    return done() if @interval and @_last and new Date - (@_last) <= @interval * 1000
 
     timestamp = (new Date @time).toUTCString()
     subject   = @template @subject
     body      = @template @body
     text      = JSON.stringify data, null, 2
     text      = @timestamp + "\n\n" + @body + "\n\n" + text
+
     await @client.send {@to, @from, @subject, text}, defer err
 
-    @_last = new Date
-
-    if err then @emit "reactor:error", err
-    else        @push data
+    if err then @error err
+    else
+      @push data
+      @_last = new Date
     done()
+
+  error: (err) => @emit "reactor:error", err
 
 
 module.exports = Email
