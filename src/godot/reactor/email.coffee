@@ -51,8 +51,8 @@ class Email extends stream.Transform
     @subject or= "Godot error for %host%:%service%"
     @client  or= new Sender @auth
 
-  template: (str) ->
-    for key, value of @values when key isnt "meta"
+  template: (str, data) ->
+    for key, value of data when key isnt "meta"
       variable = new RegExp "%#{key}%"
       str      = str.replace variable, value.toString()
     str
@@ -69,13 +69,13 @@ class Email extends stream.Transform
     #
     return done() if @interval and @_last and new Date - (@_last) <= @interval * 1000
 
-    timestamp = (new Date @time).toUTCString()
-    subject   = @template @subject
-    body      = @template @body
+    timestamp = (new Date data.time).toUTCString()
+    subject   = @template @subject, data
+    body      = @template @body, data
     text      = JSON.stringify data, null, 2
-    text      = @timestamp + "\n\n" + @body + "\n\n" + text
+    text      = timestamp + "\n\n" + @body + "\n\n" + text
 
-    await @client.send {@to, @from, @subject, text}, defer err
+    await @client.send {@to, @from, subject, text}, defer err
 
     if err then @error err
     else
