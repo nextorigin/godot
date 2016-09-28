@@ -23,7 +23,7 @@ class Redis extends stream.Transform
   constructor: (options = {}, redisFn) ->
     super objectMode: true
 
-    @client  = options.client
+    {@client, @block} = options
     @redisFn = redisFn
 
     # Check if client was passed in
@@ -37,11 +37,11 @@ class Redis extends stream.Transform
   # Uses Redis to track active resources using a bitmap
   #
   _transform: (data, encoding, done) ->
-    ideally = errify (err) =>
-      @error err
-      done()
-
-    await @redisFn @client, data, ideally defer data
+    ideally = errify @error
+    if @block
+      await @redisFn @client, data, ideally defer()
+    else
+      @redisFn @client, data, ideally ->
     @push data
     done()
 
