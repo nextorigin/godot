@@ -5,7 +5,6 @@ email.js: Stream responsible for sending emails on data events.
 
 
 stream   = require "readable-stream"
-errify   = require "errify"
 SendGrid = require "sendgrid"
 helper   = (require "sendgrid").mail
 
@@ -15,18 +14,16 @@ class Sender
     @client = SendGrid @apiKey
 
   send: ({to, from, subject, text}, callback) ->
-    ideally    = errify calback
-
     from_email = new helper.Email from
     to_email   = new helper.Email to
     content    = new helper.Content 'text/plain', text
     mail       = new helper.Mail from_email, subject, to_email, content
-    request    = client.emptyRequest(
+    request    = @client.emptyRequest(
       method: 'POST'
       path: '/v3/mail/send'
       body: mail.toJSON())
 
-    client.API request, callback
+    @client.API request, callback
 
 #
 # ### function Email (options)
