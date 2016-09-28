@@ -17,10 +17,14 @@ class Around extends stream.PassThrough
   constructor: (@reactors...) ->
     super objectMode: true
 
+    @reactors = @reactors[0] if Array.isArray @reactors[0]
     for reactor in @reactors
       throw new Error "This reactor takes a set of reactors" unless reactor instanceof stream.Stream
 
       @pipe reactor
+      reactor.on "error", @error
+
+  error: (err) => @emit "error", err
 
 
 module.exports = Around
