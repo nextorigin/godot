@@ -91,7 +91,7 @@ describe "godot/reactor/map", ->
 
       source.pipe reactor
       await
-        reactor.once "reactor:error", defer err
+        reactor.once "error", defer err
         helpers.writeFixture source, fixture
 
       expect(err).to.be.instanceof Error
@@ -109,7 +109,7 @@ describe "godot/reactor/map", ->
 
       source.pipe reactor
       await
-        reactor.once "reactor:error", defer err
+        reactor.once "error", defer err
         helpers.writeFixture source, fixture
 
       expect(err).to.be.instanceof Error
