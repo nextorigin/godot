@@ -17,6 +17,11 @@ exports.net = require('./godot/net')
 #
 require('./godot/reactor') exports
 
+dsl = {}
+for name, Reactor of exports.Reactors then do (Reactor) ->
+  dsl[name[0].toLowerCase() + name[1..]] = (args...) -> new Reactor args...
+exports.dsl = dsl
+
 #
 # ### @producer {Object}
 # Expose `producer` module for creating events

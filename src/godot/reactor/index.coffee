@@ -32,13 +32,15 @@ reactor = (godot) ->
   #
   # Register the appropriate reactors
   #
+  godot.Reactors = {}
   for file in fs.readdirSync __dirname when file not in core and ((path.extname file) is ".js") or ((path.extname file) is ".coffee")
     name    = file.replace /(.js|.coffee)$/, ""
     parts   = name.split "-"
     method  = parts[0]
     method += (parts[1..].map camelize).join "" if parts.length > 1
 
-    godot[method] = require "./#{name}"
+    godot.Reactors[camelize name] = godot[method] = require "./#{name}"
+
 
 
 module.exports = reactor
