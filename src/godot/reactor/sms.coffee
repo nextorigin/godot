@@ -6,7 +6,6 @@ sms.js: Stream responsible for sending SMS messages on data events.
 
 stream   = require "readable-stream"
 Telenode = require "telenode"
-errify   = require "errify"
 
 
 #
@@ -67,7 +66,7 @@ class Sms extends stream.Transform
       @_last = new Date
     done()
 
-  error: (err) => @emit "reactor:error", err
+  error: (err) => @emit "error", err
 
 
 module.exports = Sms

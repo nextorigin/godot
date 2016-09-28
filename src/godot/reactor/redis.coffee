@@ -46,7 +46,7 @@ class Redis extends stream.Transform
     done()
 
   error: (err) =>
-    @emit "reactor:error", err
+    @emit "error", err
 
 
 module.exports = Redis

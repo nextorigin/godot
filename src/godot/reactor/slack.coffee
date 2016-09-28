@@ -45,7 +45,7 @@ class Slack extends stream.Transform
     else        @push data
     done()
 
-  error: (err) => @emit "reactor:error", err
+  error: (err) => @emit "error", err
 
 
 module.exports = Slack

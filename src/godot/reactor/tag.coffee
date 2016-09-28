@@ -36,7 +36,6 @@ class Tag extends stream.Transform
 
     @stream.on  "error", @error
     @reactor.on "error", @error
-    @reactor.on "reactor:error", @error
 
   #
   # ### function write (data)
@@ -49,7 +48,7 @@ class Tag extends stream.Transform
     @reactor.write data
     done()
 
-  error: (err) => @emit "reactor:error", err
+  error: (err) => @emit "error", err
 
 
 module.exports = Tag

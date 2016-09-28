@@ -83,7 +83,7 @@ class Email extends stream.Transform
       @_last = new Date
     done()
 
-  error: (err) => @emit "reactor:error", err
+  error: (err) => @emit "error", err
 
 
 module.exports = Email

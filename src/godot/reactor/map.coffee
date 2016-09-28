@@ -40,7 +40,9 @@ class Map extends stream.Transform
       @push @mapFn data
       return done()
 
-    ideally = errify (err) => @emit "reactor:error", err
+    ideally = errify (err) =>
+      @error err
+      done()
 
     unless @passThrough
       await @mapFn data, ideally defer processed
@@ -50,6 +52,8 @@ class Map extends stream.Transform
     await @mapFn data, ideally defer()
     @push data
     return done()
+
+  error: (err) => @emit "error", err
 
 
 module.exports = Map

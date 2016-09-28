@@ -31,7 +31,6 @@ class Reactor extends events.EventEmitter
     stream.name = @name
     stream.id   = @id
     stream.on "error", @emit.bind this, "error"
-    stream.on "reactor:error", @emit.bind this, "reactor:error"
     last.pipe stream
 
   #reactor

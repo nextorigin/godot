@@ -24,7 +24,6 @@
 util     = require "util"
 stream   = require "readable-stream"
 graphite = require "graphite"
-errify   = require "errify"
 
 
 #
@@ -55,7 +54,6 @@ class Map extends stream.Transform
   # Sends a metric with the specified `data`.
   #
   _transform: (data, encoding, done) ->
-    ideally    = errify (err) => @emit "reactor:error", err
     now        = new Date
     metrics    = {}
     metricName = undefined
@@ -71,10 +69,15 @@ class Map extends stream.Transform
       data.service.replace(/\./g, "_").replace /\//g, "."
     metrics[metricName] = if @meta then data.meta[@meta] else data.metric
 
-    await @client.write metrics, data.time, ideally defer()
-    @_last = now
-    @push data
+    await @client.write metrics, data.time, defer err
+
+    if err then @error err
+    else
+      @push data
+      @_last = new Date
     done()
+
+  error: (err) => @emit "error", err
 
 
 module.exports = Graphite
