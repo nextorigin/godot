@@ -1,7 +1,7 @@
 {
   "name": "godot2",
   "description": "A streaming real-time event processor based on Riemann -- Streams2/3 edition",
-  "version": "1.9.9999",
+  "version": "1.9.99999",
   "author": "Charlie Robbins <charlie@nodejitsu.com>",
   "contributors": [
     {
