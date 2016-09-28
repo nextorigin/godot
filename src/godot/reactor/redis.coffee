@@ -6,7 +6,6 @@ redis.js Stream responsible for storing events in redis
 
 stream = require "readable-stream"
 errify = require "errify"
-redis  = require "redis"
 
 
 #
@@ -28,6 +27,7 @@ class Redis extends stream.Transform
 
     # Check if client was passed in
     unless @client
+      redis  = require "redis"
       @client = redis.createClient options
       @client.on "error", @error
 

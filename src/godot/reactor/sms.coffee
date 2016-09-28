@@ -5,7 +5,6 @@ sms.js: Stream responsible for sending SMS messages on data events.
 
 
 stream   = require "readable-stream"
-Telenode = require "telenode"
 
 
 #
@@ -37,6 +36,7 @@ class Sms extends stream.Transform
     #
     @body     = options.body
     unless options.client
+      Telenode = require "telenode"
       @client = new Telenode telenode.providers.twilio
       @client.credentials @auth
     else

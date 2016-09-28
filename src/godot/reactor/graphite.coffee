@@ -23,7 +23,6 @@
 
 util     = require "util"
 stream   = require "readable-stream"
-graphite = require "graphite"
 
 
 #
@@ -46,7 +45,11 @@ class Map extends stream.Transform
     @interval = options.interval or 60
     @meta     = options.meta or null
     @_last    = 0
-    @client   = options.client or graphite.createClient(@url)
+    unless options.client
+      graphite = require "graphite"
+      @client = graphite.createClient @url
+    else
+      @client   = options.client
 
   #
   # ### function write (data)
