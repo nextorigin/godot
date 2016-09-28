@@ -27,6 +27,7 @@
     "ndjson": "^1.4.3",
     "node-uuid": "~1.4.7",
     "readable-stream": "~2.1.5",
+    "stream-combiner2-withopts": "^2.0.0",
     "utile": "^0.3.0",
     "window-stream": "~0.7.4"
   },
