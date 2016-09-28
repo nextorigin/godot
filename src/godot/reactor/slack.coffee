@@ -31,7 +31,7 @@ class Slack extends stream.Transform
     @format       = formatter if formatter
 
   format: (event) ->
-    {text, fields: event}
+    {@text, fields: event}
 
   #
   # ### function write (data)
