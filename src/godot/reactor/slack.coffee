@@ -5,7 +5,6 @@ slack.js: Stream responsible for sending events to Slack in human-readable form.
 
 
 stream = require "readable-stream"
-Notify = require "slack-notify"
 
 
 #
@@ -23,6 +22,7 @@ class Slack extends stream.Transform
 
     super objectMode: true
 
+    Notify        = require "slack-notify"
     @slack        = Notify @webhook
     @icon_emoji or= ":pager:"
     @username   or= "godot"

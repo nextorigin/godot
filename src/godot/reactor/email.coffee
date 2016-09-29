@@ -5,15 +5,15 @@ email.js: Stream responsible for sending emails on data events.
 
 
 stream   = require "readable-stream"
-SendGrid = require "sendgrid"
-helper   = (require "sendgrid").mail
 
 
 class Sender
   constructor: (@apiKey) ->
-    @client = SendGrid @apiKey
+    SendGrid = require "sendgrid"
+    @client  = SendGrid @apiKey
 
   send: ({to, from, subject, text}, callback) ->
+    helper     = (require "sendgrid").mail
     from_email = new helper.Email from
     to_email   = new helper.Email to
     content    = new helper.Content 'text/plain', text
