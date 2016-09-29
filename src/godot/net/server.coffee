@@ -43,6 +43,7 @@ class Server extends events.EventEmitter
     "port"
     "path"
     "multiplex"
+    "timeout"
     "format"
   ]
 
@@ -64,6 +65,7 @@ class Server extends events.EventEmitter
     @hosts     = {}
     @[key]     = options[key] for key in @validSettings
     @log     or= ->
+    @timeout or= 300
     @format  or= "json"
     @host    or= "0.0.0.0"
     @multiplex ?= true
@@ -296,10 +298,10 @@ class Server extends events.EventEmitter
     port    = socket.remotePort
     id      = address + ":" + port
 
-    # socket.setKeepAlive true
-    # socket.setTimeout 5000 ->
-    #   log "socket timeout"
-    #   socket.end "HTTP/1.1 200 OK\r\nConnection: close\r\n\r\n"
+    socket.setKeepAlive true, 30 * 1000
+    socket.setTimeout @timeout * 1000, =>
+      @log "socket timeout"
+      socket.end "HTTP/1.1 200 OK\r\nConnection: close\r\n\r\n"
 
     @decode id, socket
 

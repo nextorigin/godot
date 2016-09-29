@@ -48,6 +48,7 @@ class Client extends stream.Transform
     "host"
     "port"
     "path"
+    "timeout"
     "reconnect"
     "format"
   ]
@@ -70,6 +71,7 @@ class Client extends stream.Transform
     @producers  = {}
     @handlers   = end: {}
     @[key]      = options[key] for key in @validSettings
+    @timeout  or= 5
     @format   or= "json"
     @host     or= "0.0.0.0"
     @_producers = options.producers
@@ -146,9 +148,11 @@ class Client extends stream.Transform
     return
 
   _reconnect: (err) ->
+    process.exit 1 if @terminate
+
     @attempt or= clone @reconnect
     @_lastErr = err
-    back @back, @attempt unless @terminate
+    back @back, @attempt
 
   fail: ->
     @terminate = true
@@ -182,7 +186,7 @@ class Client extends stream.Transform
 
     @emit "connect"
 
-  cleanup: =>
+  cleanup: ({had_error, error}) =>
     switch @type
       when "tcp", "tls", "unix"
         @serializer.unpipe @socket
@@ -190,6 +194,8 @@ class Client extends stream.Transform
         @serializer.removeListener "data", @_sendOverUDP
 
     @emit "disconnect"
+    if had_error then @socketError error or "transmission error"
+    else @_reconnect new Error "server disconnected"
 
   #
   # ### function connect (callback)
@@ -204,8 +210,10 @@ class Client extends stream.Transform
     switch @type
       when "tcp"
         @socket = net.connect {@port, @host}, @callback
+        @timeoutSocket @socket
       when "tls"
         @socket = tls.connect {@port, @host}, @callback
+        @timeoutSocket @socket
       when "udp"
         @socket = dgram.createSocket "udp4"
         process.nextTick @callback
@@ -219,6 +227,10 @@ class Client extends stream.Transform
 
     this
 
+  timeoutSocket: (socket) ->
+    await socket.setTimeout @timeout * 1000, defer()
+    @cleanup had_error: true, error: new Error "socket timeout"
+
   #
   # ### function close ()
   # Closes the underlying network connection for this client.
@@ -231,6 +243,7 @@ class Client extends stream.Transform
       else @socket.close()
 
     @remove producer for id, producer of @producers
+    @terminate = true
     this
 
   createSerializer: ->
