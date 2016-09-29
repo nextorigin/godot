@@ -4,9 +4,10 @@ redis-cache.js Stream responsible for keeping the current state in Redis
 ###
 
 
-Redis   = require "./redis"
-errify  = require "errify"
-flatten = require "flat"
+Redis       = require "./redis"
+Producer    = require "../producer/producer"
+errify      = require "errify"
+flatten     = require "flat"
 {unflatten} = flatten
 
 
@@ -56,7 +57,8 @@ class RedisCache extends Redis
     for data in datas
       data = unflatten data
       continue unless data
-      data[key] = JSON.parse data[key] for key in ["tags"] when data[key]
+      types     = Producer::types
+      data[key] = JSON.parse data[key] for key, type of types when data[key] and typeof data[key] isnt type
       @push data
 
     return
