@@ -28,10 +28,9 @@ class Producer extends stream.PassThrough
     #
     # Set the TTL
     #
+    @_streaming = options.streaming
     ttl = if typeof options.ttl is "number" then options.ttl else @defaults.ttl
     @ttl ttl
-
-    @_streaming = options.streaming
 
   #
   # ### @defaults {Object}
