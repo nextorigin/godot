@@ -11,6 +11,7 @@ tls        = require "tls"
 ndjson     = require "ndjson"
 uuid       = require "node-uuid"
 Socket     = require "./socket"
+Chain      = require "../reactor/chain"
 
 
 #
@@ -125,7 +126,7 @@ class Server extends events.EventEmitter
   argError: (arg) ->
     err = new Error "#{arg} is required to listen"
     return (@callback err) if @callback
-    @emit "error", err
+    @error err
 
   parseArgs: ->
     #
@@ -159,9 +160,10 @@ class Server extends events.EventEmitter
     @responded = true
     @emit "listening" unless err
     return (@callback err) if @callback
-    @emit "error", err if err
+    @error err if err
 
     @responded = false
+    @server.on "error", @error
 
   #
   # ### function listen (port, [host], callback)
@@ -216,8 +218,9 @@ class Server extends events.EventEmitter
   # the socket ends up writing to
   #
   createReactor: (id) =>
-    socket = new Socket
-    socket.pipe @reactors[id]
+    socket  = new Socket
+    pipe    = new Chain socket, @reactors[id]
+    pipe.on "error", @error
 
     socket: socket
     reactor: @reactors[id]
@@ -314,6 +317,8 @@ class Server extends events.EventEmitter
   #
   _onUnixSocket: (socket) =>
     @decode @path, socket
+
+  error: (err) => @emit "error", err
 
 
 module.exports = Server
