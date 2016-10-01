@@ -25,10 +25,14 @@ class RedisCache extends Redis
   constructor: (options = {}) ->
     super options, @save
 
-    {@id, @redisTtl, @changeTtl} = options
-    @id or= "godot2"
+    {@id, @ttl, @changeTtl} = options
+    @id         or= "godot2"
+    SortedCache   = require "redis-sorted-cache"
+    @cache        = new SortedCache {redis: @client, name: @id, @ttl}
 
   save: (redis, data, callback) ->
+    ideally = errify callback
+
     data  = flatten data
     saved = []
     for key, val of data when key isnt "ttl"
@@ -36,12 +40,14 @@ class RedisCache extends Redis
       saved.push key, val
 
     key    = "godot:#{@id}:#{data.host}:#{data.service}:#{data.time}"
-    expire = @redisTtl or data.ttl
-    ttl    = if @changeTtl then @redisTtl else data.ttl
+    expire = @ttl or data.ttl
+    ttl    = if @changeTtl then @ttl else data.ttl
+
     multi  = redis.multi()
     multi.hmset key, "ttl", ttl, saved...
          .EXPIRE key, expire
-         .exec callback
+    await multi.exec ideally defer()
+    @cache.addToSet key, data.time, callback
 
   #
   # ### function load
@@ -50,10 +56,11 @@ class RedisCache extends Redis
   load: =>
     ideally = errify @error
 
-    await @client.keys "godot:#{@id}:*", ideally defer keys
+    await @cache.keys ideally defer keys
     multi = @client.multi()
     multi.hgetall key for key in keys
     await multi.exec ideally defer datas
+
     for data in datas
       data = unflatten data
       continue unless data

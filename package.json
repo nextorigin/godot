@@ -55,6 +55,7 @@
   "peerDependencies": {
     "graphite": "~0.0.6",
     "redis": "~2.6.2",
+    "redis-sorted-cache": "^1.0.1",
     "sendgrid": "~4.3.0",
     "slack-notify": "^0.1.6",
     "telenode": "~0.0.3"
