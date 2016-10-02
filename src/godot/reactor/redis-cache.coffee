@@ -29,6 +29,7 @@ class RedisCache extends Redis
     @id         or= "godot2"
     SortedCache   = require "redis-sorted-cache"
     @cache        = new SortedCache {redis: @client, name: @id, @ttl}
+    @cache.autoExpire()
 
   save: (redis, data, callback) ->
     ideally = errify callback
