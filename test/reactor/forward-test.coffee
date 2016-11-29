@@ -38,6 +38,7 @@ describe "godot/reactor/forward", ->
           type: "tcp"
           host: "localhost"
           port: 3371
+          terminateOnFail: false
 
       source.pipe reactor
       await setTimeout defer(), 500

@@ -33,6 +33,7 @@ shouldStartServer = (options, callback) ->
 describe "godot/net/duplex", ->
   describe "Godot duplex", ->
     describe "where & where + expire", ->
+      terminateOnFail  = false
       ttl = 0.2
       whereExpire      = (new godot.where "service", "godot/test").pipe new godot.expire 0.2
       where            = (new godot.where "service", "godot/test")
@@ -49,6 +50,7 @@ describe "godot/net/duplex", ->
         reactors: reactors
         producers: producers
         ttl: ttl
+        terminateOnFail: terminateOnFail
 
       udp =
         type: "udp"
@@ -56,6 +58,7 @@ describe "godot/net/duplex", ->
         reactors: reactors
         producers: producers
         ttl: ttl
+        terminateOnFail: terminateOnFail
 
       unix =
         type: "unix"
@@ -63,6 +66,7 @@ describe "godot/net/duplex", ->
         reactors: reactors
         producers: producers
         ttl: ttl
+        terminateOnFail: terminateOnFail
 
       sockets = {tcp, udp, unix}
       for type, options of sockets then do (type, options) ->

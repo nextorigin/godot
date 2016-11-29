@@ -31,6 +31,7 @@ shouldStartServer = (options, callback) ->
 
 describe "godot/net/client", ->
   describe "Godot client", ->
+    terminateOnFail = false
     producers = [
       godot.producer helpers.fixtures["producer-test"]
     ]
@@ -39,17 +40,20 @@ describe "godot/net/client", ->
       host: "localhost"
       port: helpers.nextPort
       producers: producers
+      terminateOnFail: terminateOnFail
 
     udp =
       type: "udp"
       host: "localhost"
       port: helpers.nextPort
       producers: producers
+      terminateOnFail: terminateOnFail
 
     unix =
       type: "unix"
       path: "unix.sock"
       producers: producers
+      terminateOnFail: terminateOnFail
 
     sockets = {tcp, udp, unix}
     for type, options of sockets then do (type, options) ->

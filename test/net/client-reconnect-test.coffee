@@ -15,6 +15,7 @@ mocks      = require "../mocks"
 
 describe "godot/net/client-reconnect", ->
   describe "Godot client", ->
+    terminateOnFail = false
     type      = "tcp"
     reconnect =
       retries: 2
@@ -34,10 +35,10 @@ describe "godot/net/client-reconnect", ->
 
     describe "with no backoff and no server", ->
       it "should emit an error", (done) ->
-        client = godot.createClient {type, producers}
+        client = godot.createClient {type, producers, terminateOnFail}
 
         client.connect port, done
-        await client.on "error", defer err
+        await client.once "error", defer err
         client.close()
 
         expect(err).to.be.an.instanceof Error
@@ -45,26 +46,27 @@ describe "godot/net/client-reconnect", ->
 
     describe "with backoff and no server", ->
       it "should emit an error", (done) ->
-        client  = godot.createClient {type, producers, reconnect}
+        client  = godot.createClient {type, producers, reconnect, terminateOnFail}
         d       = new Date
 
         client.connect port, done
-        await client.on "error", defer err
+        await client.once "error", defer err
         client.close()
         time = new Date - d
 
         expect(err).to.be.an.instanceof Error
         expect(time, "should take appropiate amount of time").to.be.at.least 200
+
         done()
 
     describe "with backoff and server eventually coming up", ->
       it "should send data", (done) ->
         ideally = errify done
-        client  = godot.createClient {type, producers, reconnect}
+        client  = godot.createClient {type, producers, reconnect, terminateOnFail}
         d       = new Date
 
         client.connect port, ideally ->
-        client.on "error", done
+        client.once "error", done
 
         await setTimeout defer(), 300
         await mocks.net.createServer {type, port}, ideally defer server
@@ -75,4 +77,5 @@ describe "godot/net/client-reconnect", ->
 
         expect(data).to.exist
         expect(time, "should take appropiate amount of time").to.be.at.least 200
+
         done()

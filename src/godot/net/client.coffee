@@ -51,6 +51,7 @@ class Client extends stream.Transform
     "timeout"
     "reconnect"
     "format"
+    "terminateOnFail"
   ]
 
   validFormats: [
@@ -76,6 +77,7 @@ class Client extends stream.Transform
     @host     or= "0.0.0.0"
     @_producers = options.producers
     @attempt    = null
+    @terminateOnFail ?= true
 
     @defaults =
       host: ip.address()
@@ -148,7 +150,9 @@ class Client extends stream.Transform
     return
 
   _reconnect: (err) ->
-    process.exit 1 if @terminate
+    process.exit 1 if @terminate and @terminateOnFail
+    @closing = undefined if @closing
+    return unless err
 
     @attempt or= clone @reconnect
     @_lastErr = err
@@ -195,6 +199,7 @@ class Client extends stream.Transform
 
     @emit "disconnect"
     if had_error then @socketError error or "transmission error"
+    else if @closing then @_reconnect()
     else @_reconnect new Error "server disconnected"
 
   #
@@ -236,6 +241,7 @@ class Client extends stream.Transform
   # Closes the underlying network connection for this client.
   #
   close: ->
+    @closing = true
     @socket.on "close", => @emit "close"
 
     switch @type

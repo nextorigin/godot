@@ -34,9 +34,11 @@ class Forward extends stream.PassThrough
     throw new Error err if err = @validate options
     super objectMode: true
 
-    {@type, @host, @port} = options
+    clientOpts =
+      producers: [this]
+    clientOpts[setting] = options[setting] for setting in Client::validSettings when options[setting]?
     @id     = uuid.v4()
-    @client = new Client {@type, @host, @port, producers: [this]}
+    @client = new Client clientOpts
     @client.connect()
 
   #
