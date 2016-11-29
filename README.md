@@ -28,73 +28,73 @@ Many thanks and much credit to the original authors at Nodejitsu, [@indexzero](h
 Here is a simple example of a [Reactor](#reactors) server that will send an email to `user@host.com` if the [Producer](#producer) server for `app.server` fails to send a heartbeat after 60 seconds.
 
 ``` js
-  var godot = require('godot2'),
-      chain = godot.dsl.chain,
-      where = godot.dsl.where,
-      expire = godot.dsl.expire,
-      email = godot.dsl.email;
+var godot = require('godot2'),
+    chain = godot.dsl.chain,
+    where = godot.dsl.where,
+    expire = godot.dsl.expire,
+    email = godot.dsl.email;
 
+//
+// Reactor server which will email `user@host.com`
+// whenever any service matching /.*\/health\/heartbeat/
+// fails to check in after 60 seconds.
+//
+godot.createServer({
   //
-  // Reactor server which will email `user@host.com`
-  // whenever any service matching /.*\/health\/heartbeat/
-  // fails to check in after 60 seconds.
+  // Defaults to UDP
   //
-  godot.createServer({
-    //
-    // Defaults to UDP
-    //
-    type: 'udp',
-    reactors: [
-      chain([
-        where('service', '*/health/heartbeat'),
-        expire(1000 * 60),
-        email({ to: 'user@host.com' })
-      ])
-    ]
-  }).listen(1337);
+  type: 'udp',
+  reactors: [
+    chain([
+      where('service', '*/health/heartbeat'),
+      expire(1000 * 60),
+      email({ to: 'user@host.com' })
+    ])
+  ]
+}).listen(1337);
 
+//
+// Producer client which sends events for the service
+// `app.server/health/heartbeat` every 15 seconds.
+//
+godot.createClient({
   //
-  // Producer client which sends events for the service
-  // `app.server/health/heartbeat` every 15 seconds.
+  // Defaults to UDP
   //
-  godot.createClient({
-    //
-    // Defaults to UDP
-    //
-    type: 'udp',
-    producers: [
-      godot.producer({
-        host: 'app.server.com',
-        service: 'app.server/health/heartbeat',
-        ttl: 1000 * 15
-      })
-    ],
-    //
-    // Add Reconnect logic that uses `back`
-    //
-    reconnect: {
-      retries: 2,
-      minDelay: 100,
-      maxDelay: 300
-    }
-  }).connect(1337);
+  type: 'udp',
+  producers: [
+    godot.producer({
+      host: 'app.server.com',
+      service: 'app.server/health/heartbeat',
+      ttl: 1000 * 15
+    })
+  ],
+  //
+  // Add Reconnect logic that uses `back`
+  //
+  reconnect: {
+    retries: 2,
+    minDelay: 100,
+    maxDelay: 300
+  }
+}).connect(1337);
 ```
 
 ## Events
 Similar to [Riemann][riemann], events in `godot` are simply JSON sent over UDP or TCP. Each event has these optional fields:
 
 ``` js
-  {
-    host:         "A hostname, e.g. 'api1', 'foo.com'"
-    service:      "e.g. 'API port 8000 reqs/sec'",
-    state:        "Any string less than 255 bytes, e.g. 'ok', 'warning', 'critical'",
-    time:         "The time of the event, in unix epoch seconds",
-    description:  "Freeform text",
-    tags:         "Freeform list of strings, e.g. ['rate', 'fooproduct', 'transient']",
-    meta:         "Freeform set of key:value pairs e.g. { 'ewma': 12345 }",
-    metric:       "A number associated with this event, e.g. the number of reqs/sec.",
-    ttl:          "A floating-point time, in seconds, that this event is considered valid for."
-  }
+{
+  host:         "A hostname, e.g. 'api1', 'foo.com'"
+  service:      "e.g. 'API port 8000 reqs/sec'",
+  state:        "Any string less than 255 bytes, e.g. 'ok', 'warning', 'critical'",
+  time:         "The time of the event, in unix epoch seconds",
+  description:  "Freeform text",
+  tags:         "Freeform list of strings, e.g. ['rate', 'fooproduct', 'transient']",
+  meta:         "Freeform set of key:value pairs e.g. { 'ewma': 12345 }",
+  metric:       "A number associated with this event, e.g. the number of reqs/sec.",
+  ttl:          "A floating-point time, in seconds, that this event is considered valid for."
+}
 ```
 
 ## Reactors
@@ -119,10 +119,10 @@ There are several core Reactor primitives available in `godot` which can be comp
 Here are two possible rollup examples:
 
 ```js
-  var godot = require('godot2'),
-      chain = godot.dsl.chain,
-      rollup = godot.dsl.rollup,
-      email = godot.dsl.email;
+var godot = require('godot2'),
+    chain = godot.dsl.chain,
+    rollup = godot.dsl.rollup,
+    email = godot.dsl.email;
 
 //
 // Rolls up 10,0000 events every 5 minute interval
@@ -156,8 +156,8 @@ Producers in Godot are **readable** [Stream][stream] instances which produce [Ev
 
 All tests are written in [mocha][mocha] and can be run with [npm][npm]:
 
-```
-  npm test
+```sh
+npm test
 ```
 
 #### Copyright (C) 2012. Charlie Robbins, Jarrett Cruger, and the Contributors.
