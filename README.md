@@ -45,11 +45,11 @@ Here is a simple example of a [Reactor](#reactors) server that will send an emai
     //
     type: 'udp',
     reactors: [
-      chain [
+      chain([
         where('service', '*/health/heartbeat'),
         expire(1000 * 60),
         email({ to: 'user@host.com' })
-      ]
+      ])
     ]
   }).listen(1337);
 
