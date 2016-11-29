@@ -154,7 +154,7 @@ Producers in Godot are **readable** [Stream][stream] instances which produce [Ev
 
 ## Tests
 
-All tests are written in [vows][vows] and can be run with [npm][npm]:
+All tests are written in [mocha][mocha] and can be run with [npm][npm]:
 
 ```
   npm test
@@ -170,7 +170,7 @@ _Sound Wave designed by Alessandro Suraci from the thenounproject.com_
 [email-options]: https://github.com/nodejitsu/godot/tree/master/lib/godot/reactor/email.js
 [sms-options]: https://github.com/nodejitsu/godot/blob/master/lib/godot/reactor/sms.js
 [npm]: https://npmjs.org
-[vows]: http://vowsjs.org/
+[mocha]: http://mochajs.org/
 
 
   [ci-nextorigin]: https://img.shields.io/travis/nextorigin/godot2/nextorigin.svg?style=flat-square
