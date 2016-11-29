@@ -119,34 +119,34 @@ There are several core Reactor primitives available in `godot` which can be comp
 Here are two possible rollup examples:
 
 ```js
-
-var godot = require('godot');
+  var godot = require('godot2'),
+      chain = godot.dsl.chain,
+      rollup = godot.dsl.rollup,
+      email = godot.dsl.email;
 
 //
 // Rolls up 10,0000 events every 5 minute interval
 // then sends them in an email
 //
-var rollup = function (socket) {
-  return socket
-    .pipe(godot.rollup(1000 * 60 * 5, 10000))
-    .pipe(godot.email({ to: 'me@nodejitsu.com' }))
-}
+var rollup = chain([
+  rollup(1000 * 60 * 5, 10000),
+  email({ to: 'me@nodejitsu.com' })
+]);
 
 //
 // Scaling Rollup, rolls up 10,000 events every 5min interval for 1 hour,
 // then rolls up 10,000 events every 30mins and emails them out
 //
 
-var scalingRollup = function (socket) {
-  return socket
-    .pipe(godot.rollup(function (period) {
+var scalingRollup = chain([
+  rollup(function (period) {
       if(period < 12) {
         return 1000 * 60 * 5;
       }
       return 1000 * 60 * 30;
-    }, 10000))
-    .pipe(godot.email({ to: 'me@nodejitsu.com' }))
-}
+    }, 10000),
+  email({ to: 'me@nodejitsu.com' })
+]);
 ```
 
 ## Producers
