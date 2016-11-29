@@ -190,7 +190,7 @@ class Client extends stream.Transform
 
     @emit "connect"
 
-  cleanup: ({had_error, error}) =>
+  cleanup: ({had_error, error} = {}) =>
     switch @type
       when "tcp", "tls", "unix"
         @serializer.unpipe @socket
